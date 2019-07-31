@@ -10,11 +10,21 @@ const Prompt: React.FC = () => {
 		<div className="Prompt">
 			<Console />
 			<Navigation />
-			<header className="Prompt-header">
+			<header className="Prompt-header --center">
 				<h1>Curse Words</h1>
 			</header>
-			<Posts />
-			<Shows />
+			{/* <Posts />
+			<Shows /> */}
+			<div className="--center">
+				<h2>**Album Release Show at PieShop DC August 9th**</h2>
+				<h3>
+					<a href="https://pieshopdc.com/events/curse-words-album-release-accidents-split-seconds-braceface/">
+						More info here...
+					</a>
+				</h3>
+				<h2>New Album Coming Soon / August 9th!</h2>
+				<p>Free on Bandcamp</p>
+			</div>
 		</div>
 	);
 };
