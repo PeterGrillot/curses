@@ -1,0 +1,25 @@
+:root {
+	/* Colors */
+	--slate: #282828;
+	--grey: #666;
+	--light-grey: #ddd;
+	--red: #c6452b;
+
+	/* Text */
+	--text-slate: #333;
+	--text-grey: #888;
+
+	--green: #2aff20;
+	--lightgreen: #8fc49c;
+
+	--gold: #d2a021;
+
+	--blue: #39fcff;
+
+	--twitter-blue: #4099ff;
+	--laser: #ff39a1;
+
+	--component-padding: 2.4rem 3.2rem 1rem;
+	/* Typography */
+	--body-font: 'Ubuntu Mono', monospace;
+}

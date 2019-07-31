@@ -1,0 +1,13 @@
+.Navigation {
+	position: relative;
+	z-index: 2;
+}
+
+.Navigation .__list {
+	display: flex;
+	list-style: none;
+	justify-content: space-around;
+	margin: 0;
+	padding: 2rem;
+	font-size: 2rem;
+}
