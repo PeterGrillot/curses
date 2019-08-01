@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import request from 'request';
 import Loading from '../Loading/Loading.fc';
+import PostsModel, { PostType } from './Posts.model';
 import './Posts.css';
 
 type Post = {
@@ -16,28 +17,34 @@ const Posts: React.FC = () => {
 	const [ loading, setLoading ] = useState(true);
 
 	useEffect(() => {
-		request('http://localhost:5000/posts', (error, response, body) => {
-			if (error) {
-				setError(true);
-				return;
+		request(
+			'https://spreadsheets.google.com/feeds/list/1pstEHIoEiQiNtYlTTEIygRJaOVVRVUhAy6BGVzNGm20/2/public/full?alt=json',
+			(error, response, body) => {
+				if (error) {
+					setError(true);
+					return;
+				}
+				const post: any = new PostsModel(JSON.parse(body)).toUI();
+				setPosts(post);
+				setLoading(false);
 			}
-			const posts = JSON.parse(body);
-			setPosts(posts);
-			setLoading(false);
-		});
+		);
 	}, []);
+
 	if (error) return <p>Something Borked</p>;
 	if (loading) return <Loading />;
 	return (
-		<div className="Posts">
-			<h2>Posts</h2>
+		<div className="Posts --center">
+			<h2>What's Going On?</h2>
 			<ul className="__list">
-				{_.map(posts, (post: Post, index: number) => {
+				{_.map(posts, (post: PostType, index: number) => {
 					return (
 						<li className="__item" key={index}>
-							<span>{post.title} \\ </span>
-							<span>{post.content} \\ </span>
-							<span>{post.link}</span>
+							<h3>{post.title}</h3>
+							<p>{post.content}</p>
+							<p>
+								<a href={post.link}> more Info...</a>{' '}
+							</p>
 						</li>
 					);
 				})}

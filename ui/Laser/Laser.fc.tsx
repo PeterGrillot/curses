@@ -25,8 +25,8 @@ const Laser = () => {
 		const canvas = canvasRef.current;
 		if (canvas) {
 			let ctx = canvas.getContext('2d');
-			canvas.width = window.innerWidth / 10;
-			canvas.height = window.innerHeight / 10;
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
 			retinaResize(canvas, ctx, canvas.width, canvas.height);
 			let counter = 0;
 			setInterval(function() {

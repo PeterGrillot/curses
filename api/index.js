@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/', express.static('../build'));
 
 const url = 'https://spreadsheets.google.com/feeds/list/1pstEHIoEiQiNtYlTTEIygRJaOVVRVUhAy6BGVzNGm20/';
 function getPosts(req, res) {
@@ -63,6 +64,6 @@ function getShows(req, res) {
 }
 app.get('/shows/', getShows);
 
-app.listen(5000, function() {
-	console.log('http://localhost:5000');
+app.listen(8080, function() {
+	console.log('http://localhost:8080');
 });

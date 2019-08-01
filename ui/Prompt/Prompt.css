@@ -3,7 +3,7 @@
 	opacity: 1;
 	position: relative;
 	z-index: 1;
-	height: 100vh;
+	height: 100%;
 }
 
 @keyframes oscillate {

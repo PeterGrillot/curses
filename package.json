@@ -74,31 +74,19 @@
 	"scripts": {
 		"start": "node scripts/start.js",
 		"build": "node scripts/build.js",
+		"deploy": "node scripts/build.js && ./deploy.sh",
 		"test": "node scripts/test.js"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
+		"production": [ ">0.2%", "not dead", "not op_mini all" ],
+		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
 	},
 	"jest": {
-		"collectCoverageFrom": [
-			"ui/**/*.{js,jsx,ts,tsx}",
-			"!ui/**/*.d.ts"
-		],
-		"setupFiles": [
-			"react-app-polyfill/jsdom"
-		],
+		"collectCoverageFrom": [ "ui/**/*.{js,jsx,ts,tsx}", "!ui/**/*.d.ts" ],
+		"setupFiles": [ "react-app-polyfill/jsdom" ],
 		"setupFilesAfterEnv": [],
 		"testMatch": [
 			"<rootDir>/ui/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -119,26 +107,10 @@
 			"^react-native$": "react-native-web",
 			"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
 		},
-		"moduleFileExtensions": [
-			"web.js",
-			"js",
-			"web.ts",
-			"ts",
-			"web.tsx",
-			"tsx",
-			"json",
-			"web.jsx",
-			"jsx",
-			"node"
-		],
-		"watchPlugins": [
-			"jest-watch-typeahead/filename",
-			"jest-watch-typeahead/testname"
-		]
+		"moduleFileExtensions": [ "web.js", "js", "web.ts", "ts", "web.tsx", "tsx", "json", "web.jsx", "jsx", "node" ],
+		"watchPlugins": [ "jest-watch-typeahead/filename", "jest-watch-typeahead/testname" ]
 	},
 	"babel": {
-		"presets": [
-			"react-app"
-		]
+		"presets": [ "react-app" ]
 	}
 }
