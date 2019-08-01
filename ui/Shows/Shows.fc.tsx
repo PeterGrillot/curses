@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import request from 'request';
+import ShowsModel, { ShowType } from './Shows.model';
 import './Shows.css';
 import Loading from '../Loading/Loading.fc';
-
-type Show = {
-	date: string;
-	url: string;
-	venue: string;
-	roster: string;
-	location: string;
-};
 
 const Shows: React.FC = () => {
 	const [ shows, setShows ] = useState([]);
@@ -18,28 +11,31 @@ const Shows: React.FC = () => {
 	const [ loading, setLoading ] = useState(true);
 
 	useEffect(() => {
-		request('http://localhost:5000/shows', (error, response, body) => {
-			if (error) {
-				setError(true);
-				return;
+		request(
+			'https://spreadsheets.google.com/feeds/list/1pstEHIoEiQiNtYlTTEIygRJaOVVRVUhAy6BGVzNGm20/1/public/full?alt=json',
+			(error, response, body) => {
+				if (error) {
+					setError(true);
+					return;
+				}
+				const shows: any = new ShowsModel(JSON.parse(body)).toUI();
+				setShows(shows);
+				setLoading(false);
 			}
-			const shows = JSON.parse(body);
-			setShows(shows);
-			setLoading(false);
-		});
+		);
 	}, []);
 
 	if (error) return <p>Something Borked</p>;
 	if (loading) return <Loading />;
 
 	return (
-		<div className="Shows">
-			<h2>Shows</h2>
+		<div className="Shows --center">
+			<h2>Upcoming Shows</h2>
 			<ul className="__list">
 				{!_.size(shows) ? (
 					<p>No Upcoming Shows || Check Facebook, I probably forgot to update!</p>
 				) : (
-					_.map(shows, (show: Show, index: number) => {
+					_.map(shows, (show: ShowType, index: number) => {
 						return (
 							<li className="__item" key={index}>
 								<span>
