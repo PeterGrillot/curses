@@ -187,25 +187,3 @@ summary {
 template {
 	display: none;
 }
-html,
-body,
-main {
-	height: 100%;
-}
-html {
-	font-size: 10px;
-}
-body {
-	margin: 0;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-size: 1.6rem;
-	font-family: var(--body-font);
-	background: #200c23;
-	color: #f4f4f4;
-}
-ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}

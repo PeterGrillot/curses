@@ -43,7 +43,7 @@ const Posts: React.FC = () => {
 							<h3>{post.title}</h3>
 							<p>{post.content}</p>
 							<p>
-								<a href={post.link}> more Info...</a>{' '}
+								<a href={post.link}> more Info =>></a>{' '}
 							</p>
 						</li>
 					);

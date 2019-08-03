@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './styles/reset.css';
 import './styles/typography.css';
 import './styles/vars.css';
+import './styles/main.css';
 import Prompt from './Prompt/Prompt';
 import * as serviceWorker from './serviceWorker';
 

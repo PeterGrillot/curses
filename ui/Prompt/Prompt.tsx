@@ -10,7 +10,7 @@ const Prompt: React.FC = () => {
 		<div className="Prompt">
 			<Console />
 			<Navigation />
-			<header className="Prompt-header --center">
+			<header className="__header --center">
 				<h1>Curse Words Web Portal</h1>
 			</header>
 			<Posts />
