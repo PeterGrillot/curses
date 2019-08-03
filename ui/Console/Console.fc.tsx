@@ -10,7 +10,6 @@ const Console: React.FC = () => {
 			<div className="__glare" />
 			<div className="__line" />
 			<Laser />
-			<Laser />
 		</div>
 	);
 };

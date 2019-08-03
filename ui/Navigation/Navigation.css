@@ -11,3 +11,17 @@
 	padding: 2rem;
 	font-size: 2rem;
 }
+
+@media only screen and (max-width: 768px) {
+	.Navigation .__list {
+		flex-wrap: column;
+		flex-wrap: wrap;
+		padding: 2rem 2rem 0 2rem;
+	}
+	.Navigation .__item {
+		display: flex;
+		flex-basis: 50%;
+		flex-grow: 1;
+		line-height: 2;
+	}
+}

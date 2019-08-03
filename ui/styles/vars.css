@@ -22,4 +22,7 @@
 	--component-padding: 2.4rem 3.2rem 1rem;
 	/* Typography */
 	--body-font: 'Ubuntu Mono', monospace;
+
+	/* Responsive */
+	--mobile-size: 760px;
 }
