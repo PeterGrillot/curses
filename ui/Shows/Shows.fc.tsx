@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import _ from '@curses/lodash';
 import request from 'request';
 import ShowsModel, { ShowType } from './Shows.model';
 import './Shows.css';

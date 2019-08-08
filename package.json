@@ -1,6 +1,6 @@
 {
 	"name": "curses",
-	"version": "0.1.0",
+	"version": "2.0.4",
 	"private": true,
 	"dependencies": {
 		"@babel/core": "7.4.3",
@@ -45,6 +45,7 @@
 		"jest-watch-typeahead": "0.3.0",
 		"lodash": "^4.17.15",
 		"mini-css-extract-plugin": "0.5.0",
+		"module-alias": "^2.2.1",
 		"optimize-css-assets-webpack-plugin": "5.0.1",
 		"pnp-webpack-plugin": "1.2.1",
 		"postcss-flexbugs-fixes": "4.1.0",
@@ -81,25 +82,12 @@
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
+		"production": [ ">0.2%", "not dead", "not op_mini all" ],
+		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
 	},
 	"jest": {
-		"collectCoverageFrom": [
-			"ui/**/*.{js,jsx,ts,tsx}",
-			"!ui/**/*.d.ts"
-		],
-		"setupFiles": [
-			"react-app-polyfill/jsdom"
-		],
+		"collectCoverageFrom": [ "ui/**/*.{js,jsx,ts,tsx}", "!ui/**/*.d.ts" ],
+		"setupFiles": [ "react-app-polyfill/jsdom" ],
 		"setupFilesAfterEnv": [],
 		"testMatch": [
 			"<rootDir>/ui/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -115,32 +103,20 @@
 			"[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
 			"^.+\\.module\\.(css|sass|scss)$"
 		],
-		"modulePaths": [],
+		"modulePaths": [ "<rootDir>/curses-lib" ],
 		"moduleNameMapper": {
 			"^react-native$": "react-native-web",
 			"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
 		},
-		"moduleFileExtensions": [
-			"web.js",
-			"js",
-			"web.ts",
-			"ts",
-			"web.tsx",
-			"tsx",
-			"json",
-			"web.jsx",
-			"jsx",
-			"node"
-		],
-		"watchPlugins": [
-			"jest-watch-typeahead/filename",
-			"jest-watch-typeahead/testname"
-		]
+		"moduleFileExtensions": [ "web.js", "js", "web.ts", "ts", "web.tsx", "tsx", "json", "web.jsx", "jsx", "node" ],
+		"watchPlugins": [ "jest-watch-typeahead/filename", "jest-watch-typeahead/testname" ]
 	},
 	"babel": {
-		"presets": [
-			"react-app"
-		]
+		"presets": [ "react-app" ]
 	},
-	"devDependencies": {}
+	"devDependencies": {},
+	"_moduleAliases": {
+		"@curses": "ui/_curses-lib/@curses/",
+		"@styles": "ui/_styles/"
+	}
 }

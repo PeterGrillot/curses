@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/fontawesome.css';
-import './styles/brands.css';
-import './styles/regular.css';
-import './styles/reset.css';
-import './styles/typography.css';
-import './styles/vars.css';
-import './styles/main.css';
+import './_styles/fontawesome.css';
+import './_styles/brands.css';
+import './_styles/regular.css';
+import './_styles/reset.css';
+import './_styles/typography.css';
+import './_styles/vars.css';
+import './_styles/main.css';
 import Prompt from './Prompt/Prompt';
 import * as serviceWorker from './serviceWorker';
 
