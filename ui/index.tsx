@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './styles/fontawesome.css';
+import './styles/brands.css';
+import './styles/regular.css';
 import './styles/reset.css';
 import './styles/typography.css';
 import './styles/vars.css';

@@ -7,22 +7,31 @@ const Navigation: React.FC = () => {
 			<ul className="__list">
 				<li className="__item">
 					<a rel="noopener noreferrer" target="_blank" href="//instagram.com/curse_words">
-						<i className="icon ion-logo-instagram" /> Instagram
+						<i className="fab fa-instagram" /> Instagram
 					</a>
 				</li>
 				<li className="__item">
 					<a rel="noopener noreferrer" target="_blank" href="//twitter.com/CurseWordsBand">
-						<i className="icon ion-md-trash" /> Twitter
+						<i className="far fa-trash-alt" /> Twitter
 					</a>
 				</li>
 				<li className="__item">
 					<a rel="noopener noreferrer" target="_blank" href="//www.facebook.com/DontSayCurseWords/">
-						<i className="icon ion-logo-facebook" /> Facebook
+						<i className="fab fa-facebook" /> Facebook
 					</a>
 				</li>
 				<li className="__item">
 					<a rel="noopener noreferrer" target="_blank" href="//dontsaycursewords.bandcamp.com/">
-						<i className="icon ion-md-radio" /> Bandcamp
+						<i className="fab fa-bandcamp" /> Bandcamp
+					</a>
+				</li>
+				<li className="__item">
+					<a
+						rel="noopener noreferrer"
+						target="_blank"
+						href="//open.spotify.com/artist/5Yd3VFwLLJaSAPQRKwYXSN"
+					>
+						<i className="fab fa-spotify" /> Spotify
 					</a>
 				</li>
 				<li className="__item">
@@ -31,7 +40,7 @@ const Navigation: React.FC = () => {
 						target="_blank"
 						href="javascript:window.location.href = 'mailto:' + ['dontsaycursewords','gmail.com'].join('@')"
 					>
-						<i className="icon ion-md-mail" /> Email
+						<i className="far fa-envelope" /> Email
 					</a>
 				</li>
 			</ul>
