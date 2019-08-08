@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import _ from '@curses/lodash';
 
 export type PostType = {
 	title: string;

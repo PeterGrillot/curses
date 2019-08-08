@@ -6,6 +6,11 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": "ui",
+    "paths": {
+      "@curses/*": ["_curses-lib/@curses/*"],
+      "@styles/*": ["_styles/*"]
+    },
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
