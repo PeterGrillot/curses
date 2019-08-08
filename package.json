@@ -103,7 +103,6 @@
 			"[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
 			"^.+\\.module\\.(css|sass|scss)$"
 		],
-		"modulePaths": [ "<rootDir>/curses-lib" ],
 		"moduleNameMapper": {
 			"^react-native$": "react-native-web",
 			"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
