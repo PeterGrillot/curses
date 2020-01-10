@@ -7,8 +7,8 @@ import './_styles/reset.css';
 import './_styles/typography.css';
 import './_styles/vars.css';
 import './_styles/main.css';
-import Prompt from './Prompt/Prompt';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Prompt />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.unregister();
