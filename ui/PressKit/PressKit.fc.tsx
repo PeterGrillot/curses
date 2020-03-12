@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import _ from '@curses/lodash';
 import request from 'request';
-import Loading from '../Loading/Loading.fc';
-import PressKitModel, { PressKitType } from './PressKit.model';
-import './PressKit.css';
 
-type PressKit = {
-	title: string;
-	content: string;
-	image: string;
-};
+import { Loading } from '../Loading/Loading.fc';
+import { IFramePost } from './IFramePost.fc';
+import { LinkPost } from './LinkPost.fc';
+import { TextPost } from './TextPost.fc';
+
+import PressKitModel, { PressKitType } from './PressKit.model';
+
+import './PressKit.css';
 
 const PressKit: React.FC = () => {
 	const [ PressKit, setPressKit ] = useState([]);
@@ -35,20 +35,18 @@ const PressKit: React.FC = () => {
 	if (loading) return <Loading />;
 	return (
 		<div className="PressKit --center">
-			<h2>What's Going On?</h2>
-			<ul className="__list">
+			<h2>Electronic Press Kit</h2>
+			<article className="__section">
 				{_.map(PressKit, (post: PressKitType, index: number) => {
-					return (
-						<li className="__item" key={index}>
-							<h3>{post.title}</h3>
-							<p>{post.content}</p>
-							<p>
-								<img src={post.image} /> more Info
-							</p>
-						</li>
-					);
+					if (post.type === 'link') {
+						return <LinkPost key={index} {...post} />;
+					}
+					if (post.type === 'iframe') {
+						return <IFramePost key={index} {...post} />;
+					}
+					return <TextPost key={index} {...post} />;
 				})}
-			</ul>
+			</article>
 		</div>
 	);
 };

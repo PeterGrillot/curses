@@ -8,14 +8,16 @@ export default function App() {
 	return (
 		<Router>
 			<Navigation />
-			<Switch>
-				<Route path="/epk">
-					<PressKit />
-				</Route>
-				<Route path="/">
-					<Prompt />
-				</Route>
-			</Switch>
+			<div className="Container">
+				<Switch>
+					<Route path="/epk">
+						<PressKit />
+					</Route>
+					<Route path="/">
+						<Prompt />
+					</Route>
+				</Switch>
+			</div>
 		</Router>
 	);
 }

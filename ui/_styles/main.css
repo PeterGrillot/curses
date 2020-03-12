@@ -22,3 +22,7 @@ body {
 	flex-direction: column;
 	padding: 2rem;
 }
+
+.Container {
+	padding-top: 6rem;
+}
