@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import _ from '@curses/lodash';
 import request from 'request';
-import Loading from '../Loading/Loading.fc';
+import { Loading } from '../Loading/Loading.fc';
 import PostsModel, { PostType } from './Posts.model';
 import './Posts.css';
 

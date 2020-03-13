@@ -3,10 +3,10 @@ import _ from '@curses/lodash';
 import request from 'request';
 import ShowsModel, { ShowType } from './Shows.model';
 import './Shows.css';
-import Loading from '../Loading/Loading.fc';
+import { Loading } from '../Loading/Loading.fc';
 import Error from '../Error/Error.fc';
 
-const Shows: React.FC = () => {
+const Shows = () => {
 	const [ shows, setShows ] = useState([]);
 	const [ error, setError ] = useState(null);
 	const [ loading, setLoading ] = useState(true);
@@ -41,14 +41,14 @@ const Shows: React.FC = () => {
 						return (
 							<li className="__item" key={index}>
 								<p>
-									<i className="icon ion-md-calendar" /> {show.date}
+									<i className="far fa-calendar" /> {show.date}
 								</p>
 								<p>
-									<i className="icon ion-md-people" />
+									<i className="far fa-user-circle" />
 									<strong> {show.roster}</strong>
 								</p>
 								<p>
-									<i className="icon ion-md-compass" /> {show.venue} \\ {show.location}
+									<i className="far fa-compass" /> {show.venue} \\ {show.location}
 								</p>
 								<p>
 									<a href={show.url} target="_blank" rel="noopener noreferrer">

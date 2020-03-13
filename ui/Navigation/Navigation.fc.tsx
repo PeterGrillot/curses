@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from '@curses/lodash';
 import './Navigation.css';
 
 import { NAVIGATION, NavigationType } from './Navigation.constants';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navigation: React.FC = () => {
+	const [ navToggle, setNavToggle ] = useState(false);
+	let location = useLocation();
 	return (
-		<nav className="Navigation">
+		<nav className="Navigation" data-active={navToggle}>
 			<ul className="__list">
+				<li className="__item">
+					<button className="__button" onClick={() => setNavToggle(!navToggle)}>
+						<i className={`far fa-caret-square-${navToggle ? 'right' : 'left'}`} /> Close Menu
+					</button>
+				</li>
+				{location.pathname !== '/' ? (
+					<li className="__item">
+						<Link to="/">
+							<i className="far fa-arrow-alt-circle-left" /> Back
+						</Link>
+					</li>
+				) : (
+					<li className="__item">
+						<Link to="/epk">
+							<i className="far fa-newspaper" /> epk
+						</Link>
+					</li>
+				)}
 				{_.map(NAVIGATION, (item: NavigationType, index: number) => (
 					<li className="__item" key={index}>
 						<a rel="noopener noreferrer" target="_blank" href={item.href}>

@@ -4,19 +4,19 @@
 	--grey: #666;
 	--light-grey: #ddd;
 	--red: #c6452b;
+	--menu-background: #2e1535;
+	--background-light: #f8f7f2;
 
 	/* Text */
 	--text-slate: #333;
 	--text-grey: #888;
 
+	--dark-link: #940197;
+
 	--green: #2aff20;
 	--lightgreen: #8fc49c;
 
-	--gold: #d2a021;
-
 	--blue: #39fcff;
-
-	--twitter-blue: #4099ff;
 	--laser: #ff39a1;
 
 	--component-padding: 2.4rem 3.2rem 1rem;
@@ -25,4 +25,5 @@
 
 	/* Responsive */
 	--mobile-size: 760px;
+	--menu-sliver: 4rem;
 }
