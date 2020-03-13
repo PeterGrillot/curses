@@ -26,3 +26,11 @@ body {
 .Container {
 	padding-top: 6rem;
 }
+
+@media only screen and (max-width: 768px) {
+	.Container {
+		padding-top: 0;
+		width: calc(100vw - var(--menu-sliver));
+		word-break: break-word;
+	}
+}

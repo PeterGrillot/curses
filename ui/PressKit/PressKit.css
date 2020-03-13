@@ -32,10 +32,12 @@
 }
 .PressKit .__section {
 	margin: 4rem 0;
+	max-width: 720px;
 }
 .PressKit .__section .--link {
 	margin: .4rem 0;
 }
+
 .PressKit .__section br {
 	display: block;
 	content: " ";

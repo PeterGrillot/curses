@@ -3,9 +3,10 @@ import _ from '@curses/lodash';
 import request from 'request';
 
 import { Loading } from '../Loading/Loading.fc';
-import { IFramePost } from './IFramePost.fc';
-import { LinkPost } from './LinkPost.fc';
-import { TextPost } from './TextPost.fc';
+
+import { IFramePost } from './sections/IFrame.section';
+import { LinkPost } from './sections/Link.section';
+import { TextPost } from './sections/Text.section';
 
 import PressKitModel, { PressKitType } from './PressKit.model';
 

@@ -4,7 +4,9 @@
 	background: var(--menu-background);
 	z-index: 999;
 }
-
+.Navigation .__button {
+	display: none;
+}
 .Navigation .__list {
 	display: flex;
 	list-style: none;
@@ -15,9 +17,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-	.Container {
-		width: calc(100vw - var(--menu-sliver));
-	}
 	.Navigation {
 		width: 80vw;
 		right: calc(var(--menu-sliver) - 80vw);
@@ -44,6 +43,7 @@
 		text-align: center;
 	}
 	.Navigation .__button {
+		display: block;
 		background: transparent;
 		border: none;
 		color: var(--blue);

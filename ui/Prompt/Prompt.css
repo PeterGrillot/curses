@@ -4,6 +4,7 @@
 	position: relative;
 	z-index: 1;
 	height: 100%;
+	text-shadow: 0 0 8px var(--laser);
 }
 
 @media only screen and (max-width: 768px) {

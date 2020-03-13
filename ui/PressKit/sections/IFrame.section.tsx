@@ -1,5 +1,5 @@
 import React from 'react';
-import { PressKitType } from './PressKit.model';
+import { PressKitType } from '../PressKit.model';
 
 export const IFramePost = (props: PressKitType) => {
 	return (
