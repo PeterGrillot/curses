@@ -31,7 +31,7 @@ const Shows = () => {
 	if (loading) return <Loading />;
 
 	return (
-		<div className="Shows --center">
+		<div className="Shows __capsule">
 			<h2>Upcoming Shows</h2>
 			<ul className="__list">
 				{!_.size(shows) ? (

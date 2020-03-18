@@ -16,7 +16,7 @@
 	font-size: 2rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 76.8rem) {
 	.Navigation {
 		width: 80vw;
 		right: calc(var(--menu-sliver) - 80vw);

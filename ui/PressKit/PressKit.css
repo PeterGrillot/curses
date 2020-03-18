@@ -1,6 +1,9 @@
 .PressKit {
 	background-color: var(--background-light);
 	color: var(--text-slate);
+	box-shadow: 0px 0px 15px 7px #ff39a169;
+	border: 1px solid var(--laser);
+	border-bottom: none;
 }
 .PressKit a {
 	color: var(--dark-link);
@@ -42,4 +45,11 @@
 	display: block;
 	content: " ";
 	height: 2rem;
+}
+
+@media only screen and (max-width: 76.8rem) {
+	.PressKit {
+		box-shadow: none;
+		border: none;
+	}
 }

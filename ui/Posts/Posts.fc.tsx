@@ -34,7 +34,7 @@ const Posts: React.FC = () => {
 	if (error) return <p>Something Borked</p>;
 	if (loading) return <Loading />;
 	return (
-		<div className="Posts --center">
+		<div className="Posts __capsule">
 			<h2>What's Going On?</h2>
 			<ul className="__list">
 				{_.map(posts, (post: PostType, index: number) => {
@@ -42,9 +42,11 @@ const Posts: React.FC = () => {
 						<li className="__item" key={index}>
 							<h3>{post.title}</h3>
 							<p>{post.content}</p>
-							<p>
-								<a href={post.link}> more Info =>></a>{' '}
-							</p>
+							{post.link && (
+								<p>
+									<a href={post.link}> more Info =>></a>
+								</p>
+							)}
 						</li>
 					);
 				})}

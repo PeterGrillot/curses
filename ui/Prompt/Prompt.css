@@ -7,7 +7,7 @@
 	text-shadow: 0 0 8px var(--laser);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 76.8rem) {
 	.Prompt .__header {
 		padding: 0 2rem;
 	}

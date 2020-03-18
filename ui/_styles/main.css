@@ -15,19 +15,21 @@ body {
 	background: #200c23;
 	color: #f4f4f4;
 }
-.--center {
+.__capsule {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	padding: 2rem;
+	margin: auto;
+	max-width: 76.8rem;
 }
 
 .Container {
 	padding-top: 6rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 76.8rem) {
 	.Container {
 		padding-top: 0;
 		width: calc(100vw - var(--menu-sliver));

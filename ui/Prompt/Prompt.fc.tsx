@@ -8,7 +8,7 @@ const Prompt: React.FC = () => {
 	return (
 		<div className="Prompt">
 			<Console />
-			<header className="__header --center">
+			<header className="__header __capsule">
 				<h1>Curse Words Web Portal</h1>
 			</header>
 			<Posts />

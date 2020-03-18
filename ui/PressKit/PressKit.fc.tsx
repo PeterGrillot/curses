@@ -35,9 +35,9 @@ const PressKit: React.FC = () => {
 	if (error) return <p>Something Borked</p>;
 	if (loading) return <Loading />;
 	return (
-		<div className="PressKit --center">
+		<div className="PressKit __capsule">
 			<h2>Electronic Press Kit</h2>
-			<article className="__section">
+			<article className="__article">
 				{_.map(PressKit, (post: PressKitType, index: number) => {
 					if (post.type === 'link') {
 						return <LinkPost key={index} {...post} />;

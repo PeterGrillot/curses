@@ -1,3 +1,7 @@
 .Posts {
 	z-index: 1;
 }
+.Posts .__item {
+	border-bottom: 1px dotted var(--laser);
+	padding-bottom: 2rem;
+}
