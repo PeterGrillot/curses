@@ -31,6 +31,7 @@ export const NAVIGATION = [
 		text: 'Spotify'
 	},
 	{
+		// eslint-disable-next-line
 		href: "javascript:window.location.href = 'mailto:' + ['dontsaycursewords','gmail.com'].join('@')",
 		icon: 'far fa-envelope',
 		text: 'Email'

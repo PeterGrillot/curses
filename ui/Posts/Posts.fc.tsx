@@ -44,7 +44,7 @@ const Posts: React.FC = () => {
 							<p>{post.content}</p>
 							{post.link && (
 								<p>
-									<a href={post.link}> more Info =>></a>
+									<a href={post.link}> more Info 	&rarr;</a>
 								</p>
 							)}
 						</li>
