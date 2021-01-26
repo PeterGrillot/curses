@@ -52,7 +52,7 @@ const Shows = () => {
 								</p>
 								<p>
 									<a href={show.url} target="_blank" rel="noopener noreferrer">
-										more info =>>
+										more info &rarr;
 									</a>
 								</p>
 								<br />
