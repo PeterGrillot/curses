@@ -76,7 +76,7 @@
 	"scripts": {
 		"start": "node scripts/start.js",
 		"build": "node scripts/build.js",
-		"deploy": "node scripts/build.js && ./deploy.sh",
+		"deploy": "node scripts/build.js && ./scripts/deploy.sh",
 		"test": "node scripts/test.js"
 	},
 	"eslintConfig": {
