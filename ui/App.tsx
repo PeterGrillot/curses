@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Prompt from 'Prompt/Prompt.fc';
 import Navigation from './Navigation/Navigation.fc';
 import PressKit from './PressKit/PressKit.fc';
+import ReactGA from 'react-ga';
 
-export default function App() {
+const App = () => {
+	useEffect(() => {
+		ReactGA.pageview(window.location.pathname + window.location.search);
+	})
 	return (
 		<Router>
 			<Navigation />
@@ -21,3 +25,5 @@ export default function App() {
 		</Router>
 	);
 }
+
+export default App;
