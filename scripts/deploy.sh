@@ -1,6 +1,6 @@
-#! /bin/sh
-# Set up env var for your cloud creds ie: username@1.1.1.1:
-# CURSES_CREDS='username@1.1.1.1'
-# export CURSES_CREDS 
+#! /bin/bash
 
-rsync -az $(pwd)/build/ $CURSES_CREDS:/var/www/html/curses/
+# touch secret.sh && chmod -x secret.sh
+# CURSES_CREDS="name@1.1.1.1"
+# DEPLOY=$CURSES_CREDS $(pwd)/scripts/deploy.sh
+rsync -az $(pwd)/build/ $DEPLOY:/var/www/html/curses/

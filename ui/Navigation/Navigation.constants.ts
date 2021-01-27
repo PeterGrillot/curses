@@ -32,7 +32,7 @@ export const NAVIGATION = [
 	},
 	{
 		// eslint-disable-next-line
-		href: "javascript:window.location.href = 'mailto:' + ['dontsaycursewords','gmail.com'].join('@')",
+		href: 'mailto:dontsaycursewords@gmail.com',
 		icon: 'far fa-envelope',
 		text: 'Email'
 	}

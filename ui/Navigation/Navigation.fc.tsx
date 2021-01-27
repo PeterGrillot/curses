@@ -29,6 +29,7 @@ const Navigation: React.FC = () => {
 						</Link>
 					</li>
 				)}
+				<li title="&larr; Stay | Go &rarr;">|</li>
 				{_.map(NAVIGATION, (item: NavigationType, index: number) => (
 					<li className="__item" key={index}>
 						<a rel="noopener noreferrer" target="_blank" href={item.href}>

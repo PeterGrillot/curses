@@ -1,8 +1,9 @@
 .PressKit {
   background-color: var(--background-light);
+  background-image: url(../geometry_@2X.png);
+  background-size: 66.6rem;
+  background-repeat: repeat;
   color: var(--text-slate);
-  box-shadow: 0px 0px 15px 7px #ff39a169;
-  border: 1px solid var(--laser);
   border-bottom: none;
 }
 .PressKit a {
@@ -35,7 +36,7 @@
 }
 .PressKit .__section {
   margin: 4rem 0;
-  max-width: 720px;
+  max-width: 84rem;
 }
 .PressKit .__section.--link {
   margin: 0.4rem 0;
