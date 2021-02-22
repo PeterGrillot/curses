@@ -31,6 +31,11 @@ export const NAVIGATION = [
 		text: 'Spotify'
 	},
 	{
+		href: '//www.youtube.com/channel/UCAi2C7uk5a-gNXyEfqXQMRg',
+		icon: 'fab fa-youtube',
+		text: 'YouTube'
+	},
+	{
 		// eslint-disable-next-line
 		href: 'mailto:dontsaycursewords@gmail.com',
 		icon: 'far fa-envelope',
