@@ -44,8 +44,23 @@
 
 .PressKit .__section br {
   display: block;
-  content: ' ';
+  content: " ";
   height: 2rem;
+}
+
+.PressKit .__download-link {
+  position: relative;
+  display: flex;
+}
+
+.PressKit .__download-link .--hover {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  flex: 1 1 0;
+  background-color: var(--blue);
 }
 
 @media only screen and (max-width: 76.8rem) {
