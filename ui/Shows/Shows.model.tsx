@@ -13,16 +13,16 @@ class ShowsModel extends Component {
 	readonly data: Array<any>;
 	constructor(APIJson: any) {
 		super(APIJson);
-		this.data = _.get(APIJson, 'feed.entry');
+		this.data = APIJson;
 	}
 	toUI() {
 		const entries: Array<ShowType> = _.map(this.data, (entry) => {
 			return {
-				date: entry.gsx$date.$t,
-				url: entry.gsx$url.$t,
-				venue: entry.gsx$venue.$t,
-				roster: entry.gsx$roster.$t,
-				location: entry.gsx$location.$t
+				date: entry.date,
+				url: entry.url,
+				venue: entry.venue,
+				roster: entry.roster,
+				location: entry.location
 			};
 		});
 		return entries;
