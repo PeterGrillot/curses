@@ -19,7 +19,7 @@ const PressKit: React.FC = () => {
 
 	useEffect(() => {
 		request(
-			'https://spreadsheets.google.com/feeds/list/1pstEHIoEiQiNtYlTTEIygRJaOVVRVUhAy6BGVzNGm20/3/public/full?alt=json',
+			'https://sheetdb.io/api/v1/2d4v3odadqm1a',
 			(error, response, body) => {
 				if (error) {
 					setError(true);

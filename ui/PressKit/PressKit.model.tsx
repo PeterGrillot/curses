@@ -11,28 +11,28 @@ class PressKitModel extends Component {
 	readonly data: Array<any>;
 	constructor(APIJson: any) {
 		super(APIJson);
-		this.data = _.get(APIJson, 'feed.entry');
+		this.data = APIJson;
 	}
 	toUI() {
 		const entries: Array<PressKitType> = _.map(this.data, (entry) => {
-			if (entry.gsx$type.$t === 'link') {
+			if (entry.type === 'link') {
 				return {
 					type: 'link',
-					content: entry.gsx$content.$t,
-					url: entry.gsx$url.$t
+					content: entry.content,
+					url: entry.url
 				};
 			}
-			if (entry.gsx$type.$t === 'video') {
+			if (entry.type === 'video') {
 				return {
 					type: 'video',
-					content: entry.gsx$content.$t,
-					url: entry.gsx$url.$t
+					content: entry.content,
+					url: entry.url
 				};
 			}
 			return {
-				type: entry.gsx$type.$t,
-				content: entry.gsx$content.$t,
-				url: entry.gsx$url.$t
+				type: entry.type,
+				content: entry.content,
+				url: entry.url
 			};
 		});
 		return entries;

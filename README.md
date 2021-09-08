@@ -17,7 +17,6 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `npm run build`
 
-
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -29,3 +28,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## `npm run deploy`
 
 You need to chmod the deploy shell script. You'll also need the deploy shell script...
+
+## API
+
+Switched to https://sheetdb.io/apis since it's esier to use. No more posts tho...

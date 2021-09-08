@@ -1,48 +1,54 @@
 .Prompt {
-	animation: oscillate 300ms ease-in-out infinite, turn-on 1s ease-in;
-	opacity: 1;
-	position: relative;
-	z-index: 1;
-	height: 100%;
-	text-shadow: 0 0 8px var(--laser);
+  animation: oscillate 300ms ease-in-out infinite, turn-on 1s ease-in;
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  text-shadow: 0 0 8px var(--laser);
+}
+
+.Prompt .__header {
+  max-width: 50vw;
+  text-align: center;
 }
 
 @media only screen and (max-width: 76.8rem) {
-	.Prompt .__header {
-		padding: 0 2rem;
-	}
+  .Prompt .__header {
+    padding: 0 2rem;
+    max-width: auto;
+  }
 }
 
 @keyframes oscillate {
-	0% {
-		opacity: 0.88;
-	}
-	15% {
-		opacity: 0.92;
-	}
-	60% {
-		opacity: 0.90;
-	}
-	80% {
-		opacity: 0.96;
-	}
-	100% {
-		opacity: 0.88;
-	}
+  0% {
+    opacity: 0.88;
+  }
+  15% {
+    opacity: 0.92;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.96;
+  }
+  100% {
+    opacity: 0.88;
+  }
 }
 
 @keyframes turn-on {
-	0% {
-		opacity: 0;
-		background: purple;
-		transform: scale(0, 0);
-	}
-	30% {
-		opacity: 1;
-		transform: scale(1, 0.01);
-	}
-	100% {
-		background: transparent;
-		transform: scale(1, 1);
-	}
+  0% {
+    opacity: 0;
+    background: purple;
+    transform: scale(0, 0);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1, 0.01);
+  }
+  100% {
+    background: transparent;
+    transform: scale(1, 1);
+  }
 }
