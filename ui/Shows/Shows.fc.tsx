@@ -50,11 +50,13 @@ const Shows = () => {
 								<p>
 									<i className="far fa-compass" /> {show.venue} \\ {show.location}
 								</p>
-								<p>
-									<a href={show.url} target="_blank" rel="noopener noreferrer">
-										more info &rarr;
-									</a>
-								</p>
+								{show.url !== "#" ? (
+									<p>
+										<a href={show.url} target="_blank" rel="noopener noreferrer">
+										<i className="far fa-list-alt" /> more info &rarr;
+										</a>
+									</p>
+								) : null}
 								<br />
 							</li>
 						);

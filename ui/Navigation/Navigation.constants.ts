@@ -17,7 +17,7 @@ export const NAVIGATION = [
   },
   {
     href: '//www.facebook.com/DontSayCurseWords/',
-    icon: 'fab fa-facebook',
+    icon: 'far fa-thumbs-down',
     text: 'Facebook'
   },
   {

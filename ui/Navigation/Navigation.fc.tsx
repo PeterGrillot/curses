@@ -25,7 +25,7 @@ const Navigation: React.FC = () => {
         ) : (
           <li className="__item">
             <Link to="/epk">
-              <i className="far fa-newspaper" /> epk
+              <i className="far fa-newspaper" /> Press Kit
               </Link>
           </li>
         )}
