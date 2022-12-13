@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import Laser from '../Laser/Laser.fc';
-import './Console.css';
+import Laser from "../Laser/Laser.fc";
+import "./Console.css";
 
 const Console: React.FC = () => {
 	return (

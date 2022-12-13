@@ -1,15 +1,22 @@
-import React from 'react';
+import React from "react";
 // ...
 // canvas draw function
 // ...
 const Laser = () => {
 	const canvasRef: any = React.useRef(null);
-
-	const retinaResize = (canvas: HTMLCanvasElement, ctx: any, canvasWidth: number, canvasHeight: number) => {
+	const retinaResize = (
+		canvas: HTMLCanvasElement,
+		ctx: any,
+		canvasWidth: number,
+		canvasHeight: number
+	) => {
 		if (window.devicePixelRatio > 1) {
 			canvas.width = canvasWidth * window.devicePixelRatio;
 			canvas.height = canvasHeight * window.devicePixelRatio;
-			canvas.setAttribute('style', `width:${canvasWidth}px;height:${canvasHeight}px`);
+			canvas.setAttribute(
+				"style",
+				`width:${canvasWidth}px;height:${canvasHeight}px`
+			);
 			ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 		}
 	};
@@ -24,7 +31,7 @@ const Laser = () => {
 		let isIncreasing = true;
 		const canvas = canvasRef.current;
 		if (canvas) {
-			let ctx = canvas.getContext('2d');
+			let ctx = canvas.getContext("2d");
 			canvas.width = window.innerWidth;
 			canvas.height = window.innerHeight;
 			retinaResize(canvas, ctx, canvas.width, canvas.height);
@@ -36,11 +43,14 @@ const Laser = () => {
 				}
 				ctx.beginPath();
 				ctx.moveTo(counter * n, 0);
-				ctx.lineTo(getDevicePixels(canvas.width), getDevicePixels(canvas.height)); // dont touch
+				ctx.lineTo(
+					getDevicePixels(canvas.width),
+					getDevicePixels(canvas.height)
+				); // dont touch
 				ctx.lineWidth = 1;
 				ctx.closePath();
-				ctx.strokeStyle = '#ff39a1';
-				ctx.shadowColor = '#ff39a1';
+				ctx.strokeStyle = "#ff39a1";
+				ctx.shadowColor = "#ff39a1";
 				// set initial blur of 3px
 				ctx.shadowBlur = 8;
 				ctx.stroke();
@@ -53,6 +63,12 @@ const Laser = () => {
 			}, 200);
 		}
 	});
-	return <canvas ref={canvasRef} width={window.innerWidth} height={window.innerHeight} />;
+	return (
+		<canvas
+			ref={canvasRef}
+			width={window.innerWidth}
+			height={window.innerHeight}
+		/>
+	);
 };
 export default Laser;
