@@ -11,7 +11,7 @@ type Post = {
 	link: string;
 };
 
-const Posts: React.FC = () => {
+const Posts = () => {
 	const [ posts, setPosts ] = useState([]);
 	const [ error, setError ] = useState(false);
 	const [ loading, setLoading ] = useState(true);

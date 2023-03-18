@@ -3,7 +3,7 @@ import './Prompt.css';
 import Shows from '../Shows/Shows.fc';
 import Console from '../Console/Console.fc';
 
-const Prompt: React.FC = () => {
+const Prompt = () => {
 	return (
 		<div className="Prompt">
 			<Console />

@@ -1,10 +1,9 @@
 .Prompt {
   animation: oscillate 300ms ease-in-out infinite, turn-on 1s ease-in;
   opacity: 1;
-  position: relative;
   z-index: 1;
   height: 100%;
-  text-shadow: 0 0 8px var(--laser);
+  text-shadow: 0 0 8px rgb(115, 201, 115);
 }
 
 .Prompt .__header {
@@ -40,7 +39,7 @@
 @keyframes turn-on {
   0% {
     opacity: 0;
-    background: purple;
+    background: green;
     transform: scale(0, 0);
   }
   30% {

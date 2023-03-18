@@ -6,6 +6,10 @@
   color: var(--text-slate);
   border-bottom: none;
 }
+.PressKit.__capsule {
+  max-width: 600px;
+  margin: auto;
+}
 .PressKit a {
   color: var(--dark-link);
 }
@@ -60,7 +64,7 @@
   align-items: center;
   position: absolute;
   flex: 1 1 0;
-  background-color: var(--blue);
+  background-color: var(--text-green);
 }
 
 @media only screen and (max-width: 76.8rem) {
