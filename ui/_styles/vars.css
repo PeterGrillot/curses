@@ -11,7 +11,7 @@
   --text-slate: #333;
   --text-grey: #888;
 
-  --dark-link: white;
+  --dark-link: #ff39a1;
 
   --green: #2aff20;
   --text-green: #b3f7b5;
@@ -27,4 +27,7 @@
   /* Responsive */
   --mobile-size: 760px;
   --menu-sliver: 4rem;
+
+  /* Animiation */
+  --turn-on-time: 600ms;
 }

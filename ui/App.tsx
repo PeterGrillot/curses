@@ -5,6 +5,7 @@ import Navigation from "./Navigation/Navigation.fc";
 import PressKit from "./PressKit/PressKit.fc";
 import ReactGA from "react-ga";
 import Game from "./Game/Game.fc";
+import { GameProvider } from "Game/Game.reducer";
 
 const App = () => {
   useEffect(() => {
@@ -19,7 +20,11 @@ const App = () => {
             <PressKit />
           </Route>
           <Route path="/game">
-            <Game />
+            <GameProvider>
+              <div id="Game" className="Prompt">
+                <Game />
+              </div>
+            </GameProvider>
           </Route>
           <Route path="/">
             <Prompt />

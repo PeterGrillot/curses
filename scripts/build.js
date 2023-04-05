@@ -43,6 +43,19 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
 
+const buildGameScript = () => {
+  // const reggy = /(?<=\/\/ SUPER_SECRET_SCRIPT_START)(.*)(?=\/\/ SUPER_SECRET_SCRIPT_END)/s;
+  // const scriptFile = fs.readFileSync(path.resolve(__dirname, '../ui/Game/data.ts'));
+  // console.log(scriptFile.toString())
+  // const scriptString = scriptFile.toString();
+  // const matched = btoa(scriptString.match(reggy)[0]);
+  // const newScript = scriptString.replace(reggy, "SOMESHIT");
+  // console.log(">>>",scriptString.match(reggy)[0])
+  // fs.writeFileSync(path.resolve(__dirname, '/t.txt'), scriptString.match(reggy));
+}
+
+buildGameScript();
+
 // Generate configuration
 const config = configFactory('production');
 

@@ -1,6 +1,7 @@
 .Prompt {
-  animation: oscillate 300ms ease-in-out infinite, turn-on 1s ease-in;
+  /* animation: oscillate 300ms ease-in-out infinite, turn-on var(--turn-on-time) ease-in; */
   opacity: 1;
+  transform-origin: center;
   z-index: 1;
   height: 100%;
   text-shadow: 0 0 8px rgb(115, 201, 115);
@@ -40,14 +41,13 @@
   0% {
     opacity: 0;
     background: green;
-    transform: scale(0, 0);
+    transform: skewX(88deg) scale(0);
   }
   30% {
     opacity: 1;
-    transform: scale(1, 0.01);
   }
   100% {
     background: transparent;
-    transform: scale(1, 1);
+    transform: skewX(0) scale(1);
   }
 }

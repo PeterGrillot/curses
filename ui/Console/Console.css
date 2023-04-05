@@ -28,7 +28,7 @@
 	opacity: 0.3;
 	top: 0;
 	animation: linescan 20s linear infinite;
-	animation-delay: 4s;
+	animation-delay: var(--turn-on-time);
 	z-index: 3;
 }
 .Console .__glare {

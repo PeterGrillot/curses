@@ -1,4 +1,5 @@
 .PressKit {
+  font-family: "Sans Source Pro", Arial, Helvetica, sans-serif;
   background-color: var(--background-light);
   background-image: url(../geometry_@2X.png);
   background-size: 66.6rem;
@@ -9,6 +10,9 @@
 .PressKit.__capsule {
   max-width: 600px;
   margin: auto;
+}
+.PressKit p {
+  line-height: 1.2;
 }
 .PressKit a {
   color: var(--dark-link);
@@ -48,8 +52,7 @@
 
 .PressKit .__section br {
   display: block;
-  content: " ";
-  height: 2rem;
+  margin: 0.6rem;
 }
 
 .PressKit .__download-link {
