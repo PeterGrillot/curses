@@ -1,0 +1,18 @@
+7777 time hp
+Around 3-5 hits with and 8-12
+Hit with certain power ups
+10000 - Math.floor(Math.random() * 300 + 300) * FORCE // 3
+~ 900 - 1200
+
+Hit without power ups
+Math.floor(Math.random() * 300 + 300) * FORCE // 1
+~ 300 - 600
+
+2600 player hp
+
+heal for 300
+xtra atk
+xtra def
+Items ["noodz",  "stopwatch",  "crimsoncloak"]
+
+Time Hits = 10000 - Math.floor(Math.random() * 200 + 200) * FORCE // 2,  3 with stopwatch

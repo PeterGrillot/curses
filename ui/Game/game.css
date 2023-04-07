@@ -1,0 +1,170 @@
+#Game .game{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  max-width: 600px;
+  height: 80vh;
+  margin: auto;
+}
+
+#Game .game[data-scene="BEGIN"] h1 {
+  padding: 20px;
+}
+#Game .game[data-scene="DEATH"] .type-area {
+  color: #ff9595;
+  text-shadow: 2px 2px 8px #ff9595;
+}
+
+#Game .Console {
+  position: absolute;
+}
+
+#Game .Console .__crt {
+  z-index: -2;
+}
+
+#Game .img-wrapper {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+#Game img {
+  opacity: 0.6;
+  width: 100%;
+  max-width: 240px;
+  display: block;
+  margin: auto;
+}
+
+#Game button {
+  border: 1px solid white;
+  color: white;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.button-group button {
+  margin: auto;
+}
+
+.button-group {
+  padding: 20px;
+  display: flex;
+}
+.button-group.--hidden {
+  display: none;
+}
+.rack .small{
+  font-size: 10px;
+}
+.rack {
+  padding: 10px;
+  border: 1px dotted;
+  width: 100%;
+}
+
+.rack p {
+  margin: 0;
+}
+
+.rack.dialog code {
+  font-size: 16px;
+  font-family: var(--body-font);;
+  margin: auto;
+  display: table;
+}
+.rack.dialog {
+  flex: 1;
+}
+
+.rack.form {
+  display: flex;
+  padding: 0;
+}
+
+.rack label {
+  align-self: center;
+  padding: 10px;
+}
+
+.form input,
+.form .textarea-read-only {
+  width: 100%;
+  color: white;
+  font: inherit;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #a9ff982e;
+}
+
+.form .textarea-read-only,
+.form input:active,
+.form input:focus-visible,
+.form input:focus-within,
+.form input:focus {
+  outline: 0;
+  background: #b5ffa655;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.form .textarea-read-only {
+  background: #d3ffd814;
+  resize: none;
+  word-wrap: anywhere;
+}
+
+.rack:not(:first-child) {
+  border-top: none;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}
+
+.item-list {
+  margin: 0 20px;
+  display: flex;
+}
+
+.item-list li {
+  margin-left: 10px;
+}
+
+.cursor {
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: -2px;
+}
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+}
+
+.canvas {
+  scale: 0.8;
+  margin: "auto";
+  opacity: 0.8;
+}
+
+.labyrinth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
