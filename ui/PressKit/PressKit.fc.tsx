@@ -12,7 +12,7 @@ import PressKitModel, { PressKitType } from './PressKit.model';
 
 import './PressKit.css';
 
-const PressKit: React.FC = () => {
+const PressKit = () => {
 	const [ PressKit, setPressKit ] = useState([]);
 	const [ error, setError ] = useState(false);
 	const [ loading, setLoading ] = useState(true);

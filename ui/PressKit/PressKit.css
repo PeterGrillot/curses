@@ -1,10 +1,18 @@
 .PressKit {
+  font-family: "Sans Source Pro", Arial, Helvetica, sans-serif;
   background-color: var(--background-light);
   background-image: url(../geometry_@2X.png);
   background-size: 66.6rem;
   background-repeat: repeat;
   color: var(--text-slate);
   border-bottom: none;
+}
+.PressKit.__capsule {
+  max-width: 600px;
+  margin: auto;
+}
+.PressKit p {
+  line-height: 1.2;
 }
 .PressKit a {
   color: var(--dark-link);
@@ -44,8 +52,7 @@
 
 .PressKit .__section br {
   display: block;
-  content: " ";
-  height: 2rem;
+  margin: 0.6rem;
 }
 
 .PressKit .__download-link {
@@ -60,7 +67,7 @@
   align-items: center;
   position: absolute;
   flex: 1 1 0;
-  background-color: var(--blue);
+  background-color: var(--text-green);
 }
 
 @media only screen and (max-width: 76.8rem) {

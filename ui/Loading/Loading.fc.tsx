@@ -1,7 +1,7 @@
 import React from 'react';
 import './Loading.css';
 
-export const Loading: React.FC = () => (
+export const Loading = () => (
 	<span className="Loading">
 		<svg width="55" height="80" viewBox="0 0 55 80" xmlns="http://www.w3.org/2000/svg" fill="#FFF">
 			<g transform="matrix(1 0 0 -1 0 80)">

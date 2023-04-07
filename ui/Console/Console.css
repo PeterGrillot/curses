@@ -23,12 +23,12 @@
 	left: 0;
 	width: 100%;
 	height: .1rem;
-	box-shadow: 0 0 .6rem purple;
-	background-color: purple;
+	box-shadow: 0 0 .6rem #9f9;
+	background-color: #6e6;
 	opacity: 0.3;
 	top: 0;
 	animation: linescan 20s linear infinite;
-	animation-delay: 4s;
+	animation-delay: var(--turn-on-time);
 	z-index: 3;
 }
 .Console .__glare {

@@ -1,15 +1,11 @@
-import React from 'react';
+import React from "react";
+import "./Console.css";
 
-import Laser from '../Laser/Laser.fc';
-import './Console.css';
-
-const Console: React.FC = () => {
+const Console = () => {
 	return (
 		<div className="Console">
 			<div className="__crt" />
-			<div className="__glare" />
 			<div className="__line" />
-			<Laser />
 		</div>
 	);
 };

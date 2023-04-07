@@ -1,11 +1,16 @@
 .Navigation {
-  position: fixed;
   width: 100vw;
   background: var(--menu-background);
   z-index: 999;
 }
 .Navigation .__button {
   display: none;
+}
+.Navigation .__item.--highlight a {
+  color: var(--menu-background);
+}
+.Navigation .__item.--highlight{
+  background: var(--text-green);
 }
 .Navigation .__list {
   display: flex;
@@ -18,6 +23,7 @@
 
 @media only screen and (max-width: 76.8rem) {
   .Navigation {
+    position: fixed;
     width: 80vw;
     right: calc(var(--menu-sliver) - 80vw);
     height: 100vh;
@@ -49,7 +55,7 @@
     display: block;
     background: transparent;
     border: none;
-    color: var(--blue);
+    color: var(--text-green);
     margin: 0;
     padding: 0;
     font-family: inherit;

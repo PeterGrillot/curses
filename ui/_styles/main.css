@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body,
 main {
@@ -10,10 +14,10 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1.6rem;
+  font-size: 1.8em;
   font-family: var(--body-font);
-  background: #200c23;
-  color: #f4f4f4;
+  background: var(--menu-background);
+  color: var(--text-green);
 }
 .__capsule {
   display: flex;
@@ -25,13 +29,8 @@ body {
   max-width: 133rem;
 }
 
-.Container {
-  padding-top: 6rem;
-}
-
 @media only screen and (max-width: 76.8rem) {
   .Container {
-    padding-top: 0;
     width: calc(100vw - var(--menu-sliver));
     word-break: break-word;
   }
