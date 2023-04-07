@@ -26,19 +26,12 @@ const Navigation = () => {
             </Link>
           </li>
         ) : (
-            <>
-              <li className="__item --highlight">
-                <Link to="/game">
-                  <i className="far fa-clock" /> Game
-              </Link>
-              </li>
-              <li className="__item">
-                <Link to="/epk">
-                  <i className="far fa-newspaper" /> Press Kit
-              </Link>
-              </li>
-            </>
-          )}
+          <li className="__item">
+            <Link to="/epk">
+              <i className="far fa-newspaper" /> Press Kit
+            </Link>
+          </li>
+        )}
         <li title="&larr; Stay | Go &rarr;" className="__divider">
           |
         </li>
