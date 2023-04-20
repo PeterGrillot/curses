@@ -1,12 +1,21 @@
 #Game .game{
-  margin: 20px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
-  max-width: 600px;
-  height: 80vh;
+  max-width: 720px;
   margin: auto;
+  min-height: 92vh;
+}
+
+#Game .alert {
+  position: absolute;
+  background: purple;
+  padding: 20px;
+  box-shadow: 20px 20px black;
+  right: 20px;
+  top: 0;
 }
 
 #Game .game[data-scene="BEGIN"] h1 {
@@ -26,16 +35,18 @@
 }
 
 #Game .img-wrapper {
-  margin-bottom: 0;
-  margin-top: 0;
+  background: #ff00ff70;
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 20px 20px #00000059;
 }
 
 #Game img {
   opacity: 0.6;
-  width: 100%;
-  max-width: 240px;
-  display: block;
-  margin: auto;
+  margin-right: 10px;
+  width: 240px;
 }
 
 #Game button {
@@ -58,13 +69,23 @@
 .button-group.--hidden {
   display: none;
 }
-.rack .small{
+.small{
   font-size: 10px;
 }
 .rack {
   padding: 10px;
   border: 1px dotted;
   width: 100%;
+}
+
+.battle .type-area {
+  min-height: 52px;
+}
+
+.battle .status {
+  padding-top: 10px;
+  display: block;
+  border-top: 1px dotted;
 }
 
 .rack p {
@@ -166,5 +187,14 @@
 @-webkit-keyframes blink-animation {
   to {
     visibility: hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  #Game .img-wrapper img {
+    display: none;
+  }
+  .rack .iwtcot-banner code {
+    font-size: 2vw;
   }
 }

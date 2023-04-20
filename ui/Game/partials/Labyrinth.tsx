@@ -1,6 +1,7 @@
 import { useGame } from "Game/Game.reducer";
 import React, { useEffect, useRef, useState } from "react";
-
+import { LabyrinthCodes } from "../spoilers";
+// Colors
 const darkFloor = "#2D4F31";
 const lightFloor = "#89F095";
 const darkWall = "#172919";
@@ -204,6 +205,7 @@ const labyrinthMap = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 ];
 
+// Consts
 const MAP_SIZE = 12;
 
 type LocationType = Array<Array<number>>;
@@ -289,6 +291,7 @@ const Labyrinth = () => {
       const currentDirection = directionArray.indexOf(direction);
 
       switch (e.key) {
+        case "k":
         case "ArrowRight": {
           const newDirectionIndex =
             currentDirection !== 3 ? currentDirection + 1 : 0;
@@ -298,6 +301,7 @@ const Labyrinth = () => {
           setOutput("You moved Right.");
           break;
         }
+        case "j":
         case "ArrowLeft": {
           const newDirectionIndex =
             currentDirection !== 0 ? currentDirection - 1 : 3;
@@ -307,18 +311,21 @@ const Labyrinth = () => {
           setOutput("You moved Left.");
           break;
         }
+        case "i":
         case "ArrowUp": {
+          // entrance
           if (currentView[0][1] === 2) {
-            setInput("1100");
+            setInput(LabyrinthCodes.ENTRANCE);
           }
+          // exit
           if (currentView[0][1] === 3) {
-            setInput("1110");
+            setInput(LabyrinthCodes.EXIT);
           }
           if (currentView[0][1] === 4) {
-            setInput("1111");
+            setInput(LabyrinthCodes.DAGGER);
           }
           if (currentView[0][1] === 5) {
-            setInput("0000");
+            setInput(LabyrinthCodes.DEATH);
           }
           if (
             currentView[0][1] === 0 ||

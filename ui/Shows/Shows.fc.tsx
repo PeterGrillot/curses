@@ -16,7 +16,6 @@ const Shows = () => {
       "https://sheetdb.io/api/v1/6fnxojhlys43x",
       (error, response, body) => {
         if (error) {
-          console.log(error);
           setError(error);
           return;
         }
