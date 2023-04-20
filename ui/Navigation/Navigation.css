@@ -24,8 +24,8 @@
 @media only screen and (max-width: 76.8rem) {
   .Navigation {
     position: fixed;
-    width: 80vw;
-    right: calc(var(--menu-sliver) - 80vw);
+    width: 40vw;
+    right: calc(var(--menu-sliver) - 40vw);
     height: 100vh;
     transition: all 400ms ease-in-out;
   }
@@ -60,5 +60,15 @@
     padding: 0;
     font-family: inherit;
     line-height: 2;
+  }
+}
+
+@media only screen and (max-width: 40rem) {
+  .Navigation {
+    position: fixed;
+    width: 60vw;
+    right: calc(var(--menu-sliver) - 60vw);
+    height: 100vh;
+    transition: all 400ms ease-in-out;
   }
 }

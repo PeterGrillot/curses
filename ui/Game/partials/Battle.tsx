@@ -5,7 +5,7 @@ import { some, randomStringFromArray, searchWord } from "Game/helper";
 import { Items } from "Game/spoilers";
 
 const instructionText =
-  "Time looms massive. Get Ready...Battle sequence! Your items have automatically equipped and increased your stats! You can ┊attack┊ or ┊defend┊ or use unequipped items.";
+  "Time looms massive. Ready battle sequence! Objective: reduce pulsewave-telemetry enough to rip a hole in space time. Setup: your items have automatically equipped and increased your stats! You can ┊attack┊ or ┊defend┊ or use unequipped items.";
 
 const attackResponses = [
   "You prepare an assault",
@@ -48,10 +48,45 @@ function HealthBar({ hp, max }: { hp: number; max: number }) {
   );
 }
 
+type AttackResult = {
+  playerDmg: number;
+  enemyDmg: number;
+};
+
+const calculateAttacks = (
+  spirit: boolean,
+  augments: { atk: number; def: number },
+  power: boolean,
+  shield: boolean
+): AttackResult => {
+  let powerFactor = 1;
+  // Damage to enemy
+  let enemyDmg = Math.floor(
+    Math.random() * 300 +
+      300 * (augments.atk * 0.8 * (spirit ? 2 : 1)) * powerFactor
+  );
+  if (power) {
+    const dub = Math.floor(Math.random() * 2);
+    dub === 1 ? (enemyDmg = enemyDmg * 3) : (enemyDmg = 0);
+  }
+  // Damage to player
+  let playerDmg =
+    Math.floor(Math.random() * 6) !== 0
+      ? Math.floor(Math.random() * 300 + 300 / (augments.def / 2))
+      : 0;
+  if (shield) {
+    playerDmg = 0;
+  }
+
+  return {
+    enemyDmg,
+    playerDmg,
+  };
+};
+
 function Battle() {
   // reducer
-  const { state, setOutput, setInput, removeItems, setScene, setSection } =
-    useGame();
+  const { state, setOutput, setInput, removeItems, setSection } = useGame();
 
   // State
   const [playerHp, setPlayerHp] = useState(PLAYER_MAX_HP);
@@ -64,6 +99,16 @@ function Battle() {
     def: 1,
   });
 
+  const deathSequence = () => {
+    setSection("BATTLE_DEATH");
+    setOutput("");
+  };
+
+  const endSequence = () => {
+    setSection("BATTLE_END");
+    setOutput("");
+  };
+
   const handleCommand = (command: string) => {
     if (command === "" || !command) {
       return;
@@ -74,49 +119,35 @@ function Battle() {
         ["attack", "defend", Items.Pin, Items.Noodles, Items.Whiskey]
       )
     ) {
-      setOutput("Your turn...");
+      setOutput("...awaiting command");
       return;
     }
     setInput("");
     let went = false;
-    // Calculations
-    // augments
-    if (spirit) {
-      setSpirit(false);
-    }
-    let powerFactor = 1;
-    // Damage to enemy
-    let enemyDmg = Math.floor(
-      Math.random() * 300 +
-        300 * (augments.atk * 0.8 * (spirit ? 2 : 1)) * powerFactor
-    );
-    if (power) {
-      setPower(false);
-      const dub = Math.floor(Math.random() * 2);
-      dub === 1 ? (enemyDmg = enemyDmg * 3) : (enemyDmg = 0);
-    }
-    // Damage to player
-    let playerDmg =
-      Math.floor(Math.random() * 6) !== 0
-        ? Math.floor(Math.random() * 300 + 300 / (augments.def / 2))
-        : 0;
-    if (shield) {
-      playerDmg = 0;
-    }
-    // Deaths
-    if (playerHp - playerDmg <= 0) {
-      setSection("BATTLE_DEATH");
-      setOutput("");
-      return;
-    }
-    if (enemyHp - enemyDmg <= 0) {
-      setSection("BATTLE_END");
-      setOutput("...The End!");
-      return;
-    }
     // Moves
     // attack
     if (searchWord(command, "attack")) {
+      const { enemyDmg, playerDmg } = calculateAttacks(
+        spirit,
+        augments,
+        power,
+        shield
+      );
+      // Death
+      if (playerHp - playerDmg <= 0) {
+        deathSequence();
+        return;
+      }
+      if (enemyHp - enemyDmg <= 0) {
+        endSequence();
+        return;
+      }
+      if (spirit) {
+        setSpirit(false);
+      }
+      if (power) {
+        setPower(false);
+      }
       setOutput(
         `${randomStringFromArray(attackResponses)} ${
           enemyDmg === 0 ? `but miss!` : `and deal ${enemyDmg} damage!`
@@ -141,6 +172,21 @@ function Battle() {
     }
     // defend
     if (searchWord(command, "defend")) {
+      const { enemyDmg, playerDmg } = calculateAttacks(
+        spirit,
+        augments,
+        power,
+        shield
+      );
+      // Death
+      if (enemyHp - enemyDmg <= 0) {
+        endSequence();
+        return;
+      }
+      if (playerHp - playerDmg <= 0) {
+        deathSequence();
+        return;
+      }
       setOutput(
         `${randomStringFromArray(
           defendResponses
@@ -206,13 +252,14 @@ function Battle() {
       return;
     }
     if (!went) {
-      setOutput("Your turn!");
+      setOutput("...awaiting command");
       return;
     }
   };
 
   // Effects
   useEffect(function () {
+    setInput("");
     if (some(state.items, [Items.Dagger])) {
       removeItems([Items.Dagger]);
       setAugment((prev) => ({ ...prev, atk: prev.atk + 1 }));
@@ -236,14 +283,13 @@ function Battle() {
   }, []);
 
   useEffect(() => {
-    if (!!state.input) handleCommand(state.input);
-    console.log(augments);
-  }, [state.input]);
+    if (!!state.input && playerHp) handleCommand(state.input);
+  }, [state.input, playerHp]);
 
   return (
     <div className="battle">
       <div className="img-wrapper">
-        <img src="./images/time.png" />
+        <img alt="Time is massive and looms." src="./images/time.png" />
         <Typewriter text={instructionText} />
       </div>
       <div className="status">
@@ -252,8 +298,9 @@ function Battle() {
           <span className="small">健</span>:HP:
           <HealthBar hp={playerHp} max={PLAYER_MAX_HP} />:{playerHp}
         </div>
-        <div style={{ padding: "5px" }}>
-          <span className="small">頃</span>:EH:
+        <div style={{ marginTop: "20px" }}>⎡戦い:pulse-wave⎤</div>
+        <div style={{ padding: "5px", borderTop: "1px dotted" }}>
+          <span className="small">頃</span>:PW:
           <HealthBar hp={enemyHp} max={ENEMY_MAX_HP} />
           :???
         </div>

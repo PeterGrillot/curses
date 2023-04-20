@@ -6,7 +6,7 @@
   align-items: center;
   max-width: 720px;
   margin: auto;
-  min-height: 92vh;
+  min-height: 82vh;
 }
 
 #Game .alert {
@@ -92,10 +92,8 @@
   margin: 0;
 }
 
-.rack.dialog code {
-  font-size: 16px;
-  font-family: var(--body-font);;
-  margin: auto;
+.rack.dialog .iwtcot-banner {
+  margin: 20px auto;
   display: table;
 }
 .rack.dialog {
@@ -190,11 +188,8 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 64rem) {
   #Game .img-wrapper img {
     display: none;
-  }
-  .rack .iwtcot-banner code {
-    font-size: 2vw;
   }
 }

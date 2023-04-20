@@ -28,14 +28,26 @@ ul {
 	margin: 0;
 }
 
-@media (max-width:720px) {
+@media (max-width: 76.8rem) {
   .iwtcot-banner code {
-		font-size: 2vw;
+		font-size: 1.8vw;
 	}
 	pre.iwtcot-banner,
 	pre.iwtcot-banner code,
 	pre.iwtcot-banner code br{
-		line-height: 1.6vh;
+		line-height: 1.6vw;
+	}
+}
+
+
+@media (max-width: 40rem) {
+	.iwtcot-banner code {
+    font-size: 2vw;
+  }
+	pre.iwtcot-banner,
+	pre.iwtcot-banner code,
+	pre.iwtcot-banner code br{
+		line-height: 1.6vw;
 	}
 }
 

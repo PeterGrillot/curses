@@ -7,38 +7,38 @@ export type NavigationType = {
 export const NAVIGATION = [
   {
     href: '//instagram.com/curse_words',
-    icon: 'fab fa-instagram',
+    icon: 'fa fa-instagram',
     text: 'Instagram'
   },
   {
     href: '//twitter.com/CurseWordsBand',
-    icon: 'far fa-trash-alt',
+    icon: 'fa fa-trash',
     text: 'Twitter'
   },
   {
     href: '//www.facebook.com/DontSayCurseWords/',
-    icon: 'far fa-thumbs-down',
+    icon: 'fa fa-thumbs-down',
     text: 'Facebook'
   },
   {
     href: '//dontsaycursewords.bandcamp.com/',
-    icon: 'fab fa-bandcamp',
+    icon: 'fa fa-bandcamp',
     text: 'Bandcamp'
   },
   {
     href: '//open.spotify.com/artist/5Yd3VFwLLJaSAPQRKwYXSN',
-    icon: 'fab fa-spotify',
+    icon: 'fa fa-spotify',
     text: 'Spotify'
   },
   {
     href: '//www.youtube.com/channel/UCAi2C7uk5a-gNXyEfqXQMRg',
-    icon: 'fab fa-youtube',
+    icon: 'fa fa-youtube',
     text: 'YouTube'
   },
   {
     // eslint-disable-next-line
     href: 'mailto:dontsaycursewords@gmail.com',
-    icon: 'far fa-envelope',
+    icon: 'fa fa-envelope',
     text: 'Email'
   }
 ];

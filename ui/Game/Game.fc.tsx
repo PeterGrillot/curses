@@ -151,6 +151,10 @@ const Game = () => {
       if (state.scene === "BATTLE") {
         return;
       }
+      if (state.scene === "END" && state.input === "stats") {
+        setOutput("You got ");
+        return;
+      }
       if (state.input === "iddqd") {
         setOutput("GOD MODE!");
         addItems(Object.values(Items));
@@ -287,12 +291,12 @@ const Game = () => {
       </div>
       <div className="rack dialog" onClick={focusInputEffect}>
         {state.section === "BEGIN" ? <IntroScreen /> : null}
+        {state.scene === "LABYRINTH" ? <Labyrinth /> : null}
         <p className="v">
           ⎡<span className="small">場面</span>:visual-log:{" "}
           {state.section.toLowerCase().replaceAll("_", "-")}⎤
         </p>
         {state.scene === "BATTLE" ? <Battle /> : <Typewriter text={dialog} />}
-        {state.scene === "LABYRINTH" ? <Labyrinth /> : null}
       </div>
       <div className="rack form">
         <label>

@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
-import { PressKitType } from '../PressKit.model';
+import React, { useCallback, useState } from "react";
+import { PressKitType } from "../PressKit.model";
 
 export const TextPost = (props: PressKitType) => {
-  const [show, setShow] = useState<boolean>(false)
+  const [show, setShow] = useState<boolean>(false);
   const htmlObject = () => {
     return { __html: props.content };
   };
@@ -31,13 +31,13 @@ export const TextPost = (props: PressKitType) => {
         >
           <img alt="Click to Download" src={props.url} />
           {show ? (
-          <div className="--hover">
-            <i className="far fa-save" />
-            <p>Click for Image Link!</p>
-          </div>
+            <div className="--hover">
+              <i className="fa fa-save" />
+              <p>Click for Image Link!</p>
+            </div>
           ) : null}
         </a>
-      ): null}
+      ) : null}
     </section>
   );
 };

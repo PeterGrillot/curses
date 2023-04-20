@@ -180,7 +180,7 @@ const script: ScriptType = {
     prompt: {
       scene: "BEGIN",
       dialog:
-        "Prepare yourself for a journey like no other. This is a text based game set in a multiverse that takes simple commands to progress, like ┊walk forward┊, ┊look around┊. If you get stuck, read the text carefully, there might be clues. You can save and load by typing ┊save┊ and ┊load┊. Adventure awaits...",
+        "Prepare yourself for a journey like no other. This is a text based game set in a multiverse that takes simple commands to progress, like ┊walk forward┊, ┊look around┊. If you get stuck, read the text carefully, there might be clues. You can save and load by typing ┊save┊ and ┊load┊. Type ┊start┊ to begin. Adventure awaits...",
       choice: [
         {
           terms: buildCommand(Commands.Start),
@@ -1023,21 +1023,23 @@ const script: ScriptType = {
     prompt: {
       scene: "END",
       dialog:
-        "\"Evacuation, this fever dream...\" You fought well...but Time reminds you of your place in all this. Feel me not as a flowing river, but as magma, sand, towering shears, forever scorn. You trust in his word and make a run for it. You hear Caldera scream that they've been able to open the Array for all who seek so you make your way. Time, in a weakened state, with its last function before it halts and catches fire envelopes you in an inferno of your creation. Aeons collapse as you head for the portal. You see Caldera trying to catch up behind, as they plead for you to make it to the portal. You make a choice you will regret until your last breath. You lunge at the portal, feeling all your molecules ebb and flow with the time tides. You are dumped upon the shard plain, with the device that controls time. You wait and wait but nothing is coming from the other side. Caldera did not make it. \"Fuck the ending, we'll take it with us...\" You are left to pick up the pieces, wondering if it was all worth it. The end. Type stats to see you progress. Restart to start over. Or listen to the new record with a new found sense of accomplishment. If you see Pete, tell him \"No more falling sand.\" and he'll buy you a beer. Thanks for playing!",
-      choice: restartCommand,
+        "\"Evacuation, this fever dream...\" You fought well...but Time reminds you of your place in all this. Feel me not as a flowing river, but as magma, sand, towering shears, forever scorn is screams like cracking glass. You trust in his word and make a run for it. Time, in a weakened state, with its last function before it halts and catches fire envelopes you in an inferno of your creation. Aeons collapse as you head for the portal. You see Caldera trying to catch up behind, pleading for you to make it to the portal. You make a choice you will regret until your last breath. You do as they wish and lunge at the portal. Trusting that they would meet your fate, you feel all your molecules ebb and flow with the time tides. You are dumped upon the shard plain, with the device that controls time. You wait and wait but nothing is coming from the other side. Only a handful survive the chrono-collapse. Caldera did not make it. You are left to pick up the pieces, wondering if it was all worth it... The End. ┊restart┊ or ┊credits┊",
+      choice: [
+        ...restartCommand,
+        {
+          terms: ["credits"],
+          reply: "Written by Pete Grillot, inspired by Curse Words. Music by Kid Seneca. Listen to the new record with a new found sense of accomplishment. If you see me around, say \"No more falling sand.\" and I'll buy you a beer. Thanks for playing!"
+        }
+      ],
     },
   },
   BETRAY: {
     prompt: {
       dialog:
-        "You tell time what their plans are and that you've swapped a few important pieces out of the machine. Time accepts and thanks you for your duties. As consolation, you are granted access as a free agent, untethered from the binds of the second hands. You see flashes of all the people you've met, knowing their fate as they fade into the blackness. Oh well, sucks to be them. You can restart the game if you would like...I guess you win!?",
+        ". \"Fuck the ending, we'll take it with us...\" You tell time what their plans are and that you've swapped a few important pieces out of the machine. Time accepts and thanks you for your duties. As consolation, you are granted access as a free agent, untethered from the binds of the second hands. You see flashes of all the people you've met, knowing their fate as they fade into the blackness. Oh well, 'sucks to be them. You can restart the game if you would like...I guess you win!?",
       choice: restartCommand,
     },
   },
 };
-// SUPER_SECRET_SCRIPT_END
-const HELLO = "WORLD";
-// TODO: When don hide this!
-const SUPER_SECRET_SCRIPT = "REPLACE_ME_WITH_SCRIPT";
 
 export { cannedResponses, script };
