@@ -16,7 +16,6 @@ const Shows = () => {
       "https://sheetdb.io/api/v1/6fnxojhlys43x",
       (error, response, body) => {
         if (error) {
-          console.log(error);
           setError(error);
           return;
         }
@@ -43,14 +42,14 @@ const Shows = () => {
             return (
               <li className="__item" key={index}>
                 <p>
-                  <i className="far fa-calendar" /> {show.date}
+                  <i className="fa fa-calendar" /> {show.date}
                 </p>
                 <p>
-                  <i className="far fa-user-circle" />
+                  <i className="fa fa-user-circle" />
                   <strong> {show.roster}</strong>
                 </p>
                 <p>
-                  <i className="far fa-compass" /> {show.venue} \\{" "}
+                  <i className="fa fa-compass" /> {show.venue} \\{" "}
                   {show.location}
                 </p>
                 {show.url !== "#" ? (
@@ -60,7 +59,7 @@ const Shows = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className="far fa-list-alt" /> more info &rarr;
+                      <i className="fa fa-list-alt" /> more info &rarr;
                     </a>
                   </p>
                 ) : null}

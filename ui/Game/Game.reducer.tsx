@@ -10,21 +10,22 @@ export type Player = {
   section: string;
   scene: string;
   audioIsPlaying: boolean;
-  buttonsAreShowing: boolean;
   input: string;
   output: string;
 };
 
 enum ActionType {
   AddItem,
+  AddItems,
   ReplaceItem,
-  RemoveItem,
+  RemoveItems,
   SetSection,
   SetScene,
   ToggleAudio,
   LoadState,
   SetInput,
   SetOutput,
+  ResetState,
 }
 
 type Action<T, P> = {
@@ -33,37 +34,43 @@ type Action<T, P> = {
 };
 
 type AddItemActionType = ActionType.AddItem;
+type AddItemsActionType = ActionType.AddItems;
 type ReplaceItemActionType = ActionType.ReplaceItem;
-type RemoveItemActionType = ActionType.RemoveItem;
+type RemoveItemsActionType = ActionType.RemoveItems;
 type SetSectionActionType = ActionType.SetSection;
 type SetSceneActionType = ActionType.SetScene;
 type ToggleAudioActionType = ActionType.ToggleAudio;
 type LoadStateActionType = ActionType.LoadState;
 type SetInputActionType = ActionType.SetInput;
 type SetOutputActionType = ActionType.SetOutput;
+type ResetStateActionType = ActionType.ResetState;
 
 type AddItemAction = Action<AddItemActionType, string>;
+type AddItemsAction = Action<AddItemsActionType, Array<string>>;
 type ReplaceItemAction = Action<ReplaceItemActionType, string>;
-type RemoveItemAction = Action<RemoveItemActionType, string>;
+type RemoveItemsAction = Action<RemoveItemsActionType, Array<string>>;
 type SetSectionAction = Action<SetSectionActionType, string>;
 type SetSceneAction = Action<SetSceneActionType, string>;
 type ToggleAudioAction = Action<ToggleAudioActionType, boolean>;
 type LoadStateAction = Action<LoadStateActionType, Player>;
 type SetInputAction = Action<SetInputActionType, string>;
 type SetOutputAction = Action<SetOutputActionType, string>;
+type ResetStateAction = { type: ResetStateActionType };
 
 function reducer(
   state: Player,
   action:
     | AddItemAction
+    | AddItemsAction
     | ReplaceItemAction
-    | RemoveItemAction
+    | RemoveItemsAction
     | ToggleAudioAction
     | SetSectionAction
     | SetSceneAction
     | LoadStateAction
     | SetInputAction
     | SetOutputAction
+    | ResetStateAction
 ) {
   switch (action.type) {
     case ActionType.AddItem:
@@ -72,6 +79,8 @@ function reducer(
         items:
           action.payload === "clear" ? [] : [...state.items, action.payload],
       };
+    case ActionType.AddItems:
+      return { ...state, items: action.payload };
     case ActionType.ReplaceItem: {
       const filteredItems = state.items.filter(
         (i) => i !== action.payload.slice(1)
@@ -81,8 +90,11 @@ function reducer(
         items: [...filteredItems, action.payload],
       };
     }
-    case ActionType.RemoveItem: {
-      const filteredItems = state.items.filter((i) => i !== action.payload);
+    case ActionType.RemoveItems: {
+      const itemsToRemove = action.payload;
+      const filteredItems = state.items.filter(
+        (item) => !itemsToRemove.includes(item)
+      );
       return {
         ...state,
         items: filteredItems,
@@ -100,20 +112,29 @@ function reducer(
       return { ...state, audioIsPlaying: action.payload };
     case ActionType.LoadState:
       return { ...action.payload };
+    case ActionType.ResetState:
+      return { ...initialState };
     default:
       throw Error("Unknown Action");
   }
 }
 
-export const INTRO_INPUT = "$%REIU$%IUREIU$%IUERKJFDkjgfkjreiuewiu";
+export const INTRO_INPUT = "@$@$@%@$%%$%@*#%";
 
 //Context and Provider
 const initialState = {
   items: [],
+  // items: [
+  //   Items.Shard,
+  //   Items.Dagger,
+  //   Items.Energy,
+  //   Items.Whiskey,
+  //   Items.Noodles,
+  //   Items.Wire,
+  // ], DEV Only
   section: "BEGIN",
   scene: "BEGIN",
   audioIsPlaying: false,
-  buttonsAreShowing: false,
   input: INTRO_INPUT,
   output: "",
 };
@@ -139,9 +160,10 @@ interface GameContextType {
   toggleAudio: (toggle: boolean) => void;
   loadState: (newState: Player) => void;
   addItem: (item: string) => void;
+  addItems: (items: Array<string>) => void;
   replaceItem: (item: string) => void;
-  removeItem: (item: string) => void;
-  buttonsAreShowing: boolean;
+  removeItems: (items: Array<string>) => void;
+  resetState: () => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -170,7 +192,7 @@ const GameProvider = ({ children }: PropsWithChildren<{}>) => {
   const loadState = (newState: Player) => {
     dispatch({
       type: ActionType.LoadState,
-      payload: { ...newState, output: "Last save loaded!" },
+      payload: { ...newState },
     });
   };
 
@@ -178,12 +200,20 @@ const GameProvider = ({ children }: PropsWithChildren<{}>) => {
     dispatch({ type: ActionType.AddItem, payload: item });
   };
 
+  const addItems = (items: Array<string>) => {
+    dispatch({ type: ActionType.AddItems, payload: items });
+  };
+
   const replaceItem = (item: string) => {
     dispatch({ type: ActionType.ReplaceItem, payload: item });
   };
 
-  const removeItem = (item: string) => {
-    dispatch({ type: ActionType.RemoveItem, payload: item });
+  const removeItems = (items: Array<string>) => {
+    dispatch({ type: ActionType.RemoveItems, payload: items });
+  };
+
+  const resetState = () => {
+    dispatch({ type: ActionType.ResetState });
   };
 
   const value: GameContextType = {
@@ -196,9 +226,10 @@ const GameProvider = ({ children }: PropsWithChildren<{}>) => {
     toggleAudio,
     loadState,
     addItem,
+    addItems,
     replaceItem,
-    removeItem,
-    buttonsAreShowing: false,
+    removeItems,
+    resetState,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

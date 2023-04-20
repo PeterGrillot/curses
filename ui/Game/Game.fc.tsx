@@ -1,24 +1,35 @@
-import React, { FormEvent, useCallback, useEffect, useRef } from "react";
+import React, {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "./game.css";
 import Typewriter from "./Typewriter.fc";
-import { script, cannedResponses, ItemSearch, Condition } from "./spoilers";
-// import Console from "../Console/Console.fc";
+import {
+  script,
+  cannedResponses,
+  ItemSearch,
+  Condition,
+  Items,
+} from "./spoilers";
 import { INTRO_INPUT, useGame } from "./Game.reducer";
 import { IntroScreen } from "./partials/Intro";
 import { Labyrinth } from "./partials/Labyrinth";
 import { Battle } from "./partials/Battle";
-import { some } from "./helper";
+import { randomStringFromArray, some } from "./helper";
 import Console from "../Console/Console.fc";
 
+// Generic Functions
 const hasAnyItemInArray = (
   currentItems: Array<string>,
   compare: Array<string>
-) => currentItems.some((r) => compare.includes(r.replace("+", "")));
+) => compare.some((r) => currentItems.includes(r.replace("+", "")));
 
 const handleSaveToLocalStorage = (state: any, setOutput: any) => {
   const password = `password+${btoa(JSON.stringify(state))}`;
   localStorage.setItem("save", password);
-  setOutput(`Saved in your browser! You can load by typing ┊load┊`);
 };
 
 const handleLoadFromLocalStorage = (loadState: any) => {
@@ -37,6 +48,7 @@ const handleSetScene = (section: string, setScene: Function) => {
 };
 
 const Game = () => {
+  // Reducers
   const {
     state,
     setSection,
@@ -44,8 +56,10 @@ const Game = () => {
     toggleAudio,
     loadState,
     addItem,
+    addItems,
     replaceItem,
-    removeItem,
+    removeItems,
+    resetState,
     setInput,
     setOutput,
   } = useGame();
@@ -58,6 +72,12 @@ const Game = () => {
     inputRef.current?.focus();
   }
 
+  // State
+  const [alertMessage, setAlertMessage] = useState<String | undefined>(
+    undefined
+  );
+
+  // Memoized
   const memoizedHandleSaveToLocalStorage = useCallback(
     () => handleSaveToLocalStorage(state, setOutput),
     [state, setOutput]
@@ -73,6 +93,51 @@ const Game = () => {
     [state.section, setScene]
   );
 
+  // Methods
+  const handleMessage = (message: string) => {
+    setAlertMessage((prev) => {
+      if (!prev) return message;
+    });
+
+    const timeout = setTimeout(() => {
+      setAlertMessage((prev) => {
+        if (prev) return undefined;
+      });
+    }, 3000);
+    return () => clearTimeout(timeout);
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { value } = event.currentTarget.input;
+    if (state.input === value) {
+      // This is fucking stupid but it works
+      // If the user enters the same thing twice
+      // There is a bug in how I am using useEffect with
+      // the state.input dependency
+      console.log("same");
+      setInput(value.toUpperCase());
+      return;
+    }
+    // clear input
+    if (inputRef.current) inputRef.current.value = "";
+    // no command
+    if (value === "" || !value) {
+      return;
+    }
+    setInput(value);
+  };
+
+  const handleToggleAudio = () => {
+    if (state.audioIsPlaying) {
+      audioRef.current?.pause();
+      toggleAudio(false);
+    } else {
+      audioRef.current?.play();
+      toggleAudio(true);
+    }
+  };
+
   // Effects
   useEffect(
     function changeSectionEffect() {
@@ -83,6 +148,19 @@ const Game = () => {
 
   useEffect(
     function inputEffect() {
+      if (state.scene === "BATTLE") {
+        return;
+      }
+      if (state.scene === "END" && state.input === "stats") {
+        setOutput("You got ");
+        return;
+      }
+      if (state.input === "iddqd") {
+        setOutput("GOD MODE!");
+        addItems(Object.values(Items));
+        setSection("BATTLE_INIT");
+        return;
+      }
       if (state.input === INTRO_INPUT) {
         setOutput(
           "Type ┊begin┊ below to start or ┊about┊ for information about the game."
@@ -92,6 +170,7 @@ const Game = () => {
       // save
       if (state.input === "save") {
         memoizedHandleSaveToLocalStorage();
+        handleMessage("r/w disk: success");
         return;
       }
       // load cache
@@ -99,19 +178,14 @@ const Game = () => {
         memoizedHandleLoadFromLocalStorage();
         return;
       }
-      // // load password string
-      // if (state.input.startsWith("password+")) {
-      //   loadPassword(state.input);
-      //   return;
-      // }
       // always on replies
-      if (some(["shit", "fuck"], state.input.split(" "))) {
+      if (some(["shit", "fuck", "fucking"], state.input.split(" "))) {
         setOutput("I am also a fan of Curse Words!");
         return;
       }
-      if (some(state.input.split(" "), ["stuck"])) {
+      if (some(["stuck"], state.input.split(" "))) {
         setOutput(
-          "Try typing in an action like ┊look around┊, ┊search┊ or ┊go right┊. If you are stuck generally, you will need some items to progress, so try revisiting places. Some items are found if you ┊search┊ curtain places."
+          "Try typing in an action like ┊look around┊, ┊search┊ or ┊go right┊. If you are stuck generally, you will need some items to progress, so try revisiting places. Some items are found if you ┊search┊ certain places."
         );
         return;
       }
@@ -121,12 +195,13 @@ const Game = () => {
       let hitCount = 0;
       choice?.forEach(({ terms, code, reply, item, use }) => {
         terms.forEach((i) => {
-          const userInput: string = state.input;
+          const userInput: string = state.input.toLowerCase();
           const keyword: string = i;
-          hit = userInput.toLowerCase().includes(keyword.toLowerCase());
+          const pattern = new RegExp(`\\b${keyword}\\b`, "g");
+          hit = pattern.test(userInput);
+
           if (hit) {
             hitCount++;
-            console.log(hitCount);
             // new section
             if (hitCount === 1) {
               if (code) {
@@ -148,10 +223,6 @@ const Game = () => {
                   if (item.startsWith("+")) replaceItem(item);
                   else addItem(item);
                 }
-                if (use) {
-                  console.log(use);
-                  removeItem(use);
-                }
                 setOutput(reply);
                 return;
               }
@@ -161,122 +232,105 @@ const Game = () => {
       });
       // unknown input
       if (!hitCount) {
-        setOutput(
-          cannedResponses[Math.floor(Math.random() * cannedResponses.length)]
-        );
+        setOutput(randomStringFromArray(cannedResponses));
       }
     },
     [state.input]
   );
 
-  const handleBattleReply = (text: string) => {
-    setOutput(text);
-  };
-
-  // Methods
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const { value } = event.currentTarget.input;
-    // clear input
+  useEffect(() => {
+    // Reset input
     if (inputRef.current) inputRef.current.value = "";
-    // no command
-    if (value === "" || !value) {
-      return;
-    }
-    setInput(value);
-  };
+  }, [state.input]);
 
-  const handleToggleAudio = () => {
-    if (state.audioIsPlaying) {
-      audioRef.current?.pause();
-      toggleAudio(false);
-    } else {
-      audioRef.current?.play();
-      toggleAudio(true);
+  useEffect(() => {
+    // Death reset
+    if (state.section === "BEGIN") {
+      resetState();
     }
-  };
-
-  // Item Conditions
-  if (script[state.section].condition) {
-    const { condition } = script[state.section] as Condition;
-    const { items, goto, else: gotoElse, type } = condition;
-    if (type === ItemSearch.AnyAll) {
-      if (hasAnyItemInArray(items, state.items)) {
-        setSection(goto);
-      } else {
-        setSection(gotoElse);
+    // Item Conditions
+    if (script[state.section].condition) {
+      const { condition } = script[state.section] as Condition;
+      const { items, goto, else: gotoElse, type, uses } = condition;
+      if (type === ItemSearch.AnyAll) {
+        if (hasAnyItemInArray(items, state.items)) {
+          if (uses) {
+            removeItems(uses);
+          }
+          setSection(goto);
+        } else {
+          setSection(gotoElse);
+        }
+      }
+      if (type === ItemSearch.AnyExact) {
+        if (some(items, state.items)) {
+          setSection(goto);
+        } else {
+          setSection(gotoElse);
+        }
       }
     }
-    if (type === ItemSearch.AnyExact) {
-      if (some(items, state.items)) {
-        setSection(goto);
-      } else {
-        setSection(gotoElse);
-      }
-    }
-    return null;
-  } else if (script[state.section].prompt) {
-    const dialog = script[state.section].prompt?.dialog ?? "";
-    return (
-      <div className="game" data-scene={state.scene}>
-        <div className="rack status">
-          <button onClick={handleToggleAudio}>
-            {state.audioIsPlaying ? "◉ BG Music" : "○ BG Music"}
-          </button>
-          <ul className="item-list">
-            {state.items.length ? <li>items:</li> : null}
-            {state.items.map((i) => (
-              <li key={i}>{i}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="rack dialog" onClick={focusInputEffect}>
-          {state.section === "BEGIN" ? <IntroScreen /> : null}
-          {state.section === "END" ? <IntroScreen /> : null}
-          <p className="v">
-            ⎡<span className="small">場面</span>:visual-log:{" "}
-            {state.scene.toLowerCase().replaceAll("_", "-")}⎤
-          </p>
-          {state.scene === "BATTLE" ? (
-            <Battle
-              command={"inputState"}
-              handleBattleReply={handleBattleReply}
-            />
-          ) : (
-            <Typewriter text={dialog} />
-          )}
-          {state.scene === "LABYRINTH" ? <Labyrinth /> : null}
-        </div>
-        <div className="rack form">
-          <label>
-            <span className="small">出力</span>:cp:output:
-          </label>
-          <div className="textarea-read-only">
-            {state.output}
-            <span className="cursor">▓</span>
-          </div>
-        </div>
-        <form className="rack form" onSubmit={handleSubmit}>
-          <label htmlFor="input">
-            <span className="small">入力</span>:usr:input:
-          </label>
-          <input
-            autoFocus
-            autoComplete="off"
-            type="text"
-            name="input"
-            id="input"
-            className="input"
-            ref={inputRef}
-          />
-        </form>
-        <Console />
-        <audio ref={audioRef} src={`audio/${state.scene}.mp3`} loop autoPlay />
+  }, [state.section]);
+
+  const dialog = script[state.section].prompt?.dialog ?? "";
+  return (
+    <div className="game" data-scene={state.scene}>
+      <div className="alert" hidden={!alertMessage}>
+        {alertMessage}
       </div>
-    );
-  } else {
-    return null;
-  }
+      <div className="rack status">
+        <button onClick={handleToggleAudio}>
+          {state.audioIsPlaying ? "◉ BG Music" : "○ BG Music"}
+        </button>
+        <ul className="item-list">
+          {state.items.length ? <li>items:</li> : null}
+          {state.items.map((i) => (
+            <li key={i}>{i}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="rack dialog" onClick={focusInputEffect}>
+        {state.section === "BEGIN" ? <IntroScreen /> : null}
+        {state.scene === "LABYRINTH" ? <Labyrinth /> : null}
+        <p className="v">
+          ⎡<span className="small">場面</span>:visual-log:{" "}
+          {state.section.toLowerCase().replaceAll("_", "-")}⎤
+        </p>
+        {state.scene === "BATTLE" ? <Battle /> : <Typewriter text={dialog} />}
+      </div>
+      <div className="rack form">
+        <label>
+          <span className="small">出力</span>:cp:output:
+        </label>
+        <div className="textarea-read-only">
+          {state.output}
+          <span className="cursor">▓</span>
+        </div>
+      </div>
+      <form className="rack form" onSubmit={handleSubmit}>
+        <label htmlFor="input">
+          <span className="small">入力</span>:usr:input:
+        </label>
+        <input
+          autoFocus
+          disabled={state.scene === "LABYRINTH"}
+          autoComplete="off"
+          type="text"
+          name="input"
+          id="input"
+          className="input"
+          ref={inputRef}
+        />
+      </form>
+      <Console />
+      <audio
+        ref={audioRef}
+        src={`audio/${state.scene}.mp3`}
+        loop
+        autoPlay={state.audioIsPlaying}
+      />
+    </div>
+  );
 };
 
 export default Game;

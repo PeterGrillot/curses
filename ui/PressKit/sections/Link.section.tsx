@@ -6,7 +6,7 @@ export const LinkPost = (props: PressKitType) => {
     <section className="__section --link">
       <p>
         <a href={props.url}>
-          {props.content} <i className="far fa-share-square" />
+          {props.content} <i className="fa fa-share-square" />
         </a>
       </p>
     </section>
