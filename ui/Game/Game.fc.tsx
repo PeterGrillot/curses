@@ -115,7 +115,6 @@ const Game = () => {
       // If the user enters the same thing twice
       // There is a bug in how I am using useEffect with
       // the state.input dependency
-      console.log("same");
       setInput(value.toUpperCase());
       return;
     }
@@ -156,9 +155,18 @@ const Game = () => {
         return;
       }
       if (state.input === "iddqd") {
-        setOutput("GOD MODE!");
         addItems(Object.values(Items));
         setSection("BATTLE_INIT");
+        return;
+      }
+      if (state.input === "haxthamainframe") {
+        addItems([
+          Items.Noodles,
+          Items.Whiskey,
+          Items.ShardPlus,
+          Items.WirePlus,
+        ]);
+        setSection("LABYRINTH");
         return;
       }
       if (state.input === INTRO_INPUT) {
@@ -193,7 +201,7 @@ const Game = () => {
       const choice = script[state.section].prompt?.choice;
       let hit = false;
       let hitCount = 0;
-      choice?.forEach(({ terms, code, reply, item, use }) => {
+      choice?.forEach(({ terms, code, reply, item }) => {
         terms.forEach((i) => {
           const userInput: string = state.input.toLowerCase();
           const keyword: string = i;
@@ -273,6 +281,8 @@ const Game = () => {
   }, [state.section]);
 
   const dialog = script[state.section].prompt?.dialog ?? "";
+
+  console.log(state.hasBeen);
   return (
     <div className="game" data-scene={state.scene}>
       <div className="alert" hidden={!alertMessage}>
@@ -296,7 +306,17 @@ const Game = () => {
           ⎡<span className="small">場面</span>:visual-log:{" "}
           {state.section.toLowerCase().replaceAll("_", "-")}⎤
         </p>
-        {state.scene === "BATTLE" ? <Battle /> : <Typewriter text={dialog} />}
+        {state.scene === "BATTLE" ? (
+          <Battle />
+        ) : (
+          <>
+            {state.hasBeen[state.section] !== 1 ? (
+              <Typewriter text={dialog} />
+            ) : (
+              <p>{dialog}</p>
+            )}
+          </>
+        )}
       </div>
       <div className="rack form">
         <label>

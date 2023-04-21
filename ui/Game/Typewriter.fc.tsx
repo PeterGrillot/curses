@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Typewriter = ({ text }: { text: string }) => {
   const [typewrite, setTypewrite] = useState("");
   const [currentText, setCurrentText] = useState(text);
-  const speed = 3;
+  const speed = 4;
 
   // Type
   useEffect(() => {

@@ -113,7 +113,7 @@ const buildCommand = (
     case Commands.Accept:
       return [...extra, "yes", "accept", "agree", "ok", "whatever", "i am", "ready"];
     case Commands.Decline:
-      return [...extra, "decline", "no", "reject", "nope", "ok", "nah"];
+      return [...extra, "decline", "no", "reject", "nope", "nah"];
     case Commands.Array:
       return [
         ...extra,
@@ -138,7 +138,7 @@ const helperCommands: Array<MoveChoice | ReplyChoice> = [
   {
     terms: buildCommand(Commands.Help),
     reply:
-      "Try typing in simple terms like ┊look around┊ or ┊go forward┊. If you get stuck, you can also trying looking at your watch to return to the Array.",
+      "Try typing in simple terms like ┊look around┊ or ┊go west. If you get stuck, you can also trying looking at your watch to return to the Array.",
   },
 ];
 
@@ -164,7 +164,7 @@ const arrayCommand: MoveChoice = {
 
 const timepieceDeny: ReplyChoice = {
   terms: buildCommand(Commands.Array),
-  reply: "It's doesn't seem like you can't use the timepiece here.",
+  reply: "It's doesn't seem like you can use the timepiece here.",
 };
 
 const restartCommand = [
@@ -217,10 +217,6 @@ const script: ScriptType = {
         {
           terms: ["north", "ahead", "forward"],
           code: "TIME_TOMBS_DEATH",
-        },
-        {
-          terms: ["idspispopd"],
-          code: "LABYRINTH",
         },
         {
           terms: ["right", "east"],
@@ -371,7 +367,7 @@ const script: ScriptType = {
   TIME_TOMBS_CAVE: {
     prompt: {
       dialog:
-        'You slowly enter the cave. It is warm and welcoming, but you sense a presence. "Time has suddenly become everything...." A booming voice shakes the earth like listening to an avalanche. It is Time itself. "A proposition..." It tells you that it is becoming ill. On one of its branches, creatures have devised a way to control Time infinitely. A random portal here and there is one thing, but a Time...machine? If you can stop them, Time will grant you the power to travel anywhere, feel time not as a river, but rock, sand, magma, all at once. It presents you with a ┊timepiece┊...fitting. You have a choice. If you can stop these creatures from setting off chaos, you will be rewarded. Tell them who is responsible for this sickness. An ┊array┊ of three portals appears in front of you. One white, one green, one purple. It cannot be sure which branch is infected, so go forth, and use the ┊timepiece┊ to return here. When the time is right, you will know what to do. Which path do you choose? Remember, at certain points on your journey you may be able return here by simply looking at your ┊timepiece┊ to return to the ┊array┊...',
+        'You slowly enter the cave. It is warm and welcoming, but you sense a presence. "Time has suddenly become everything...." A booming voice shakes the earth like listening to an avalanche. It is Time itself. "A proposition..." It tells you that it is becoming ill. On one of its branches, creatures have devised a way to control Time infinitely. A random portal here and there is one thing, but a Time...machine? If you can stop them, Time will grant you the power to travel anywhere, feel time not as a river, but rock, sand, magma, all at once. It presents you with a timepiece...fitting. You have a choice. If you can stop these creatures from setting off chaos, you will be rewarded. Tell them who is responsible for this sickness. An array of three portals appears in front of you. One ┊white┊, one ┊green┊, one ┊purple┊. It cannot be sure which branch is infected, so go forth, and use the timepiece to return here. When the time is right, you will know what to do. Which path do you choose? Remember, at certain points on your journey you may be able return here by simply looking at your ┊timepiece┊ to return to the ┊array┊...',
       choice: [
         veiledThreat,
         timepieceDeny,
@@ -943,7 +939,7 @@ const script: ScriptType = {
       dialog: "They call themselves Caldera and they promise to take you to the Glass Smashers lair. It's high up in the city so you hop in a Kroto-Curl HKR Albatross II, a sleek chrome flying craft. It is incredible! Caldera weaves between the floating islands, etching contrails into the morning light as you make your way to touch the sky. The capacious horizon clashes with the jagged skyline of deep crimsons and brilliant emerald hues as the suns swallow the twilight. \"Ante Meridiem, right before I drown in the dark...\" You reached the lair of the Glass Smashers. It is filled with tools and trinkets, it looks more like a workshop. You meet the head of the gang. They call themselves Caliban. They are thankful for saving one of their members from the Time cult. They think they have a way to control Time itself so they can get off this rotting branch. You wonder about the paradox that looms. Could their actions for trying to control time be actually causing Time from trying to rid them or is it Time that has forced their hand by ticking so violently... You shake the thought away and ask how far they have come. One of the older looking scientists chimes in that they only need a Shard...",
       choice: [
         {
-          terms: buildCommand(Commands.Accept, ["shard"]),
+          terms: ["shard"],
           code: "GLASS_SMASHERS_SHARD_CHECK",
         },
         {

@@ -12,6 +12,7 @@ export type Player = {
   audioIsPlaying: boolean;
   input: string;
   output: string;
+  hasBeen: Record<string, number>;
 };
 
 enum ActionType {
@@ -100,8 +101,25 @@ function reducer(
         items: filteredItems,
       };
     }
-    case ActionType.SetSection:
-      return { ...state, section: action.payload };
+    case ActionType.SetSection: {
+      console.log(state.hasBeen, action.payload);
+      let check = state.hasBeen[action.payload];
+      let newState = {};
+      if (!check) {
+        newState = { [action.payload]: -1 };
+      }
+      if (check === -1) {
+        newState = { [action.payload]: 1 };
+      }
+      return {
+        ...state,
+        section: action.payload,
+        hasBeen: {
+          ...state.hasBeen,
+          ...newState,
+        },
+      };
+    }
     case ActionType.SetScene:
       return { ...state, scene: action.payload };
     case ActionType.SetInput:
@@ -113,7 +131,7 @@ function reducer(
     case ActionType.LoadState:
       return { ...action.payload };
     case ActionType.ResetState:
-      return { ...initialState };
+      return { ...initialState, audioIsPlaying: state.audioIsPlaying };
     default:
       throw Error("Unknown Action");
   }
@@ -137,6 +155,7 @@ const initialState = {
   audioIsPlaying: false,
   input: INTRO_INPUT,
   output: "",
+  hasBeen: {},
 };
 
 // const GameContext = createContext<Player>(initialState);

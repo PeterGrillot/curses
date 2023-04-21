@@ -12,7 +12,6 @@ const App = () => {
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   });
-  console.log(location);
   return (
     <div className={location.pathname}>
       <Navigation />
