@@ -301,8 +301,8 @@ function Battle() {
         <div style={{ marginTop: "20px" }}>⎡戦い:pulse-wave⎤</div>
         <div style={{ padding: "5px", borderTop: "1px dotted" }}>
           <span className="small">頃</span>:PW:
-          <HealthBar hp={enemyHp} max={ENEMY_MAX_HP} />
-          :???
+          <HealthBar hp={enemyHp} max={ENEMY_MAX_HP} />:
+          {enemyHp >= ENEMY_MAX_HP / 2 ? "???" : enemyHp}
         </div>
       </div>
     </div>

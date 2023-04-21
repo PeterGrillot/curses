@@ -1,5 +1,5 @@
 .Navigation {
-  width: 100vw;
+  width: 100%;
   background: var(--menu-background);
   z-index: 999;
 }

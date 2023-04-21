@@ -374,7 +374,7 @@ const Labyrinth = () => {
     return function cleanup() {
       document.removeEventListener("keyup", handleKeyUp);
     };
-  }, [direction, currentMap, currentView]);
+  });
 
   useEffect(() => {
     const newView = getLocationByDirection(direction, currentMap);
