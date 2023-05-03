@@ -142,6 +142,8 @@ const Game = () => {
     function changeSectionEffect() {
       memoizedHandleSetScene();
     },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state.section]
   );
 
@@ -243,6 +245,8 @@ const Game = () => {
         setOutput(randomStringFromArray(cannedResponses));
       }
     },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state.input]
   );
 
@@ -251,34 +255,39 @@ const Game = () => {
     if (inputRef.current) inputRef.current.value = "";
   }, [state.input]);
 
-  useEffect(() => {
-    // Death reset
-    if (state.section === "BEGIN") {
-      resetState();
-    }
-    // Item Conditions
-    if (script[state.section].condition) {
-      const { condition } = script[state.section] as Condition;
-      const { items, goto, else: gotoElse, type, uses } = condition;
-      if (type === ItemSearch.AnyAll) {
-        if (hasAnyItemInArray(items, state.items)) {
-          if (uses) {
-            removeItems(uses);
+  useEffect(
+    () => {
+      // Death reset
+      if (state.section === "BEGIN") {
+        resetState();
+      }
+      // Item Conditions
+      if (script[state.section].condition) {
+        const { condition } = script[state.section] as Condition;
+        const { items, goto, else: gotoElse, type, uses } = condition;
+        if (type === ItemSearch.AnyAll) {
+          if (hasAnyItemInArray(items, state.items)) {
+            if (uses) {
+              removeItems(uses);
+            }
+            setSection(goto);
+          } else {
+            setSection(gotoElse);
           }
-          setSection(goto);
-        } else {
-          setSection(gotoElse);
+        }
+        if (type === ItemSearch.AnyExact) {
+          if (some(items, state.items)) {
+            setSection(goto);
+          } else {
+            setSection(gotoElse);
+          }
         }
       }
-      if (type === ItemSearch.AnyExact) {
-        if (some(items, state.items)) {
-          setSection(goto);
-        } else {
-          setSection(gotoElse);
-        }
-      }
-    }
-  }, [state.section]);
+    },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state.section]
+  );
 
   const dialog = script[state.section].prompt?.dialog ?? "";
 
@@ -309,14 +318,14 @@ const Game = () => {
         {state.scene === "BATTLE" ? (
           <Battle />
         ) : (
-          <>
-            {state.hasBeen[state.section] !== 1 ? (
-              <Typewriter text={dialog} />
-            ) : (
-              <p>{dialog}</p>
-            )}
-          </>
-        )}
+            <>
+              {state.hasBeen[state.section] !== 1 ? (
+                <Typewriter text={dialog} />
+              ) : (
+                  <p>{dialog}</p>
+                )}
+            </>
+          )}
       </div>
       <div className="rack form">
         <label>

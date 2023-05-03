@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "@curses/lodash";
 
 type Props = {
 	error: string | null;

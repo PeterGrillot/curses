@@ -63,7 +63,7 @@ const calculateAttacks = (
   // Damage to enemy
   let enemyDmg = Math.floor(
     Math.random() * 300 +
-      300 * (augments.atk * 0.8 * (spirit ? 2 : 1)) * powerFactor
+    300 * (augments.atk * 0.8 * (spirit ? 2 : 1)) * powerFactor
   );
   if (power) {
     const dub = Math.floor(Math.random() * 2);
@@ -150,14 +150,14 @@ function Battle() {
       }
       setOutput(
         `${randomStringFromArray(attackResponses)} ${
-          enemyDmg === 0 ? `but miss!` : `and deal ${enemyDmg} damage!`
+        enemyDmg === 0 ? `but miss!` : `and deal ${enemyDmg} damage!`
         }
         ${randomStringFromArray(timeDefendsAttackResponses)} ${
-          playerDmg === 0
-            ? `but ${
-                shield ? "you used Shield!" : "misses"
-              }! You take no damage.`
-            : `and hits hard. You take ${playerDmg}!`
+        playerDmg === 0
+          ? `but ${
+          shield ? "you used Shield!" : "misses"
+          }! You take no damage.`
+          : `and hits hard. You take ${playerDmg}!`
         }${enemyHp < 2000 ? " Time is weakening!" : "."}`
       );
       setEnemyHp((prev) => {
@@ -191,13 +191,13 @@ function Battle() {
         `${randomStringFromArray(
           defendResponses
         )} Time takes advantage and hits hard ${
-          playerDmg === 0
-            ? ` but ${
-                shield
-                  ? " you have Energy shield! You take no damage."
-                  : "misses! You take no damage."
-              }`
-            : ` and you take ${playerDmg}!`
+        playerDmg === 0
+          ? ` but ${
+          shield
+            ? " you have Energy shield! You take no damage."
+            : "misses! You take no damage."
+          }`
+          : ` and you take ${playerDmg}!`
         }`
       );
       setPlayerHp((prev) => {
@@ -258,33 +258,43 @@ function Battle() {
   };
 
   // Effects
-  useEffect(function () {
-    setInput("");
-    if (some(state.items, [Items.Dagger])) {
-      removeItems([Items.Dagger]);
-      setAugment((prev) => ({ ...prev, atk: prev.atk + 1 }));
-    }
-    if (some(state.items, [Items.Wire])) {
-      removeItems([Items.Wire]);
-      setAugment((prev) => ({ ...prev, atk: prev.atk + 1 }));
-    }
-    if (some(state.items, [Items.WirePlus])) {
-      removeItems([Items.WirePlus]);
-      setAugment((prev) => ({ ...prev, atk: prev.atk + 2 }));
-    }
-    if (some(state.items, [Items.Shard])) {
-      removeItems([Items.Shard]);
-      setAugment((prev) => ({ ...prev, def: prev.def + 1 }));
-    }
-    if (some(state.items, [Items.ShardPlus])) {
-      removeItems([Items.ShardPlus]);
-      setAugment((prev) => ({ ...prev, def: prev.def + 2 }));
-    }
-  }, []);
+  useEffect(
+    function() {
+      setInput("");
+      if (some(state.items, [Items.Dagger])) {
+        removeItems([Items.Dagger]);
+        setAugment((prev) => ({ ...prev, atk: prev.atk + 1 }));
+      }
+      if (some(state.items, [Items.Wire])) {
+        removeItems([Items.Wire]);
+        setAugment((prev) => ({ ...prev, atk: prev.atk + 1 }));
+      }
+      if (some(state.items, [Items.WirePlus])) {
+        removeItems([Items.WirePlus]);
+        setAugment((prev) => ({ ...prev, atk: prev.atk + 2 }));
+      }
+      if (some(state.items, [Items.Shard])) {
+        removeItems([Items.Shard]);
+        setAugment((prev) => ({ ...prev, def: prev.def + 1 }));
+      }
+      if (some(state.items, [Items.ShardPlus])) {
+        removeItems([Items.ShardPlus]);
+        setAugment((prev) => ({ ...prev, def: prev.def + 2 }));
+      }
+    },
 
-  useEffect(() => {
-    if (!!state.input && playerHp) handleCommand(state.input);
-  }, [state.input, playerHp]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  useEffect(
+    () => {
+      if (!!state.input && playerHp) handleCommand(state.input);
+    },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state.input, playerHp]
+  );
 
   return (
     <div className="battle">
