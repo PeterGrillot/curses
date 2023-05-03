@@ -192,8 +192,8 @@ type DirectionType = typeof Direction[keyof typeof Direction];
 // prettier-ignore
 const labyrinthMap = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
-  1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1,
+  1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1,
   1, 5, 0, 1, 0, 0, 1, 5, 0, 0, 0, 1,
   1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1,
   1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4, 1,
@@ -285,88 +285,91 @@ const Labyrinth = () => {
   );
   const { setInput, setOutput } = useGame();
 
+  const handleMove = (key: string) => {
+    const directionArray = Object.keys(Direction);
+    const currentDirection = directionArray.indexOf(direction);
+
+    switch (key) {
+      case "ArrowRight": {
+        const newDirectionIndex =
+          currentDirection !== 3 ? currentDirection + 1 : 0;
+        setDirection(
+          Direction[directionArray[newDirectionIndex] as DirectionType]
+        );
+        setOutput("You moved Right.");
+        break;
+      }
+      case "ArrowLeft": {
+        const newDirectionIndex =
+          currentDirection !== 0 ? currentDirection - 1 : 3;
+        setDirection(
+          Direction[directionArray[newDirectionIndex] as DirectionType]
+        );
+        setOutput("You moved Left.");
+        break;
+      }
+      case "ArrowUp": {
+        // entrance
+        if (currentView[0][1] === 2) {
+          setInput(LabyrinthCodes.ENTRANCE);
+        }
+        // exit
+        if (currentView[0][1] === 3) {
+          setInput(LabyrinthCodes.EXIT);
+        }
+        if (currentView[0][1] === 4) {
+          setInput(LabyrinthCodes.DAGGER);
+        }
+        if (currentView[0][1] === 5) {
+          setInput(LabyrinthCodes.DEATH);
+        }
+        if (
+          currentView[0][1] === 0 ||
+          currentView[0][1] === 4 ||
+          currentView[0][1] === 6
+        ) {
+          if (currentView[0][1] === 0) {
+            setOutput("You moved Forward.");
+          }
+          if (currentView[0][1] === 6) {
+            setOutput("You hear hooves clammer in the distance...");
+          }
+          setCurrentMap((prevState) => {
+            const loc = prevState.indexOf(-1);
+            const newMap = prevState;
+            newMap[loc] = currentView[0][1];
+            switch (direction) {
+              case Direction.North:
+                newMap[loc - MAP_SIZE] = -1;
+                setCurrentView(getLocationByDirection(direction, newMap));
+                return newMap;
+              case Direction.South:
+                newMap[loc + MAP_SIZE] = -1;
+                setCurrentView(getLocationByDirection(direction, newMap));
+                return newMap;
+              case Direction.East:
+                newMap[loc + 1] = -1;
+                setCurrentView(getLocationByDirection(direction, newMap));
+                return newMap;
+              case Direction.West:
+                newMap[loc - 1] = -1;
+                setCurrentView(getLocationByDirection(direction, newMap));
+                return newMap;
+              default:
+                return [];
+            }
+          });
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     function handleKeyUp(e: KeyboardEvent) {
-      const directionArray = Object.keys(Direction);
-      const currentDirection = directionArray.indexOf(direction);
-
-      switch (e.key) {
-        case "k":
-        case "ArrowRight": {
-          const newDirectionIndex =
-            currentDirection !== 3 ? currentDirection + 1 : 0;
-          setDirection(
-            Direction[directionArray[newDirectionIndex] as DirectionType]
-          );
-          setOutput("You moved Right.");
-          break;
-        }
-        case "j":
-        case "ArrowLeft": {
-          const newDirectionIndex =
-            currentDirection !== 0 ? currentDirection - 1 : 3;
-          setDirection(
-            Direction[directionArray[newDirectionIndex] as DirectionType]
-          );
-          setOutput("You moved Left.");
-          break;
-        }
-        case "i":
-        case "ArrowUp": {
-          // entrance
-          if (currentView[0][1] === 2) {
-            setInput(LabyrinthCodes.ENTRANCE);
-          }
-          // exit
-          if (currentView[0][1] === 3) {
-            setInput(LabyrinthCodes.EXIT);
-          }
-          if (currentView[0][1] === 4) {
-            setInput(LabyrinthCodes.DAGGER);
-          }
-          if (currentView[0][1] === 5) {
-            setInput(LabyrinthCodes.DEATH);
-          }
-          if (
-            currentView[0][1] === 0 ||
-            currentView[0][1] === 4 ||
-            currentView[0][1] === 6
-          ) {
-            if (currentView[0][1] === 0) {
-              setOutput("You moved Forward.");
-            }
-            if (currentView[0][1] === 6) {
-              setOutput("You hear hooves clammer in the distance...");
-            }
-            setCurrentMap((prevState) => {
-              const loc = prevState.indexOf(-1);
-              const newMap = prevState;
-              newMap[loc] = currentView[0][1];
-              switch (direction) {
-                case Direction.North:
-                  newMap[loc - MAP_SIZE] = -1;
-                  setCurrentView(getLocationByDirection(direction, newMap));
-                  return newMap;
-                case Direction.South:
-                  newMap[loc + MAP_SIZE] = -1;
-                  setCurrentView(getLocationByDirection(direction, newMap));
-                  return newMap;
-                case Direction.East:
-                  newMap[loc + 1] = -1;
-                  setCurrentView(getLocationByDirection(direction, newMap));
-                  return newMap;
-                case Direction.West:
-                  newMap[loc - 1] = -1;
-                  setCurrentView(getLocationByDirection(direction, newMap));
-                  return newMap;
-              }
-            });
-          }
-          break;
-        }
-        default:
-          break;
-      }
+      handleMove(e.key);
     }
     document.addEventListener("keyup", handleKeyUp);
 
@@ -389,6 +392,11 @@ const Labyrinth = () => {
         :compass:{direction}
       </div>
       <Canvas view={currentView} />
+      <div className="controls">
+        <button onClick={() => handleMove("ArrowLeft")}>⇐</button>
+        <button onClick={() => handleMove("ArrowUp")}>⇑</button>
+        <button onClick={() => handleMove("ArrowRight")}>⇒</button>
+      </div>
     </div>
   );
 };

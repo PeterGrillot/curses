@@ -177,6 +177,15 @@
   align-items: center;
 }
 
+.labyrinth .controls {
+  display: flex;
+  margin: 0 auto 16px auto;
+}
+
+.labyrinth .controls button {
+  padding: 8px 16px;
+}
+
 @keyframes blink-animation {
   to {
     visibility: hidden;

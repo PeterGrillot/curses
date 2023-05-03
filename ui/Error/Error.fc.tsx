@@ -1,12 +1,12 @@
-import React from 'react';
-import _ from '@curses/lodash';
+import React from "react";
+import _ from "@curses/lodash";
 
 type Props = {
-	error: any;
+	error: string | null;
 };
 
-const Error = (props: Props) => {
-	return <p>{_.get(props, 'error.message', "Somthin' goof'd")}</p>;
+const Error = ({ error }: Props) => {
+	return <p>{error ?? "Seeett"}</p>;
 };
 
 export default Error;
