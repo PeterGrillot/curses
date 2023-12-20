@@ -1,6 +1,6 @@
 # Curse Words Webportal
 
-Built with React, Node, Express, Goggle Sheets. In the project directory, you can run:
+Built with React, Node, Express, Google Sheets. In the project directory, you can run:
 
 ### `npm start`
 
