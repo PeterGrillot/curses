@@ -102,7 +102,6 @@ function reducer(
       };
     }
     case ActionType.SetSection: {
-      console.log(state.hasBeen, action.payload);
       let check = state.hasBeen[action.payload];
       let newState = {};
       if (!check) {

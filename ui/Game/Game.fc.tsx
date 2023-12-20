@@ -76,6 +76,8 @@ const Game = () => {
   const [alertMessage, setAlertMessage] = useState<String | undefined>(
     undefined
   );
+  const [stageHistory, setStageHistory] = useState<Array<string>>([]);
+  const [stageHistoryBox, setStageHistoryBox] = useState<boolean>(false);
 
   // Memoized
   const memoizedHandleSaveToLocalStorage = useCallback(
@@ -137,6 +139,10 @@ const Game = () => {
     }
   };
 
+  const handleToggleHistory = () => {
+    setStageHistoryBox(!stageHistoryBox);
+  };
+
   // Effects
   useEffect(
     function changeSectionEffect() {
@@ -144,6 +150,19 @@ const Game = () => {
     },
     [state.section]
   );
+
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && stageHistoryBox) {
+        setStageHistoryBox(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [stageHistoryBox]);
 
   useEffect(
     function inputEffect() {
@@ -173,6 +192,16 @@ const Game = () => {
         setOutput(
           "Type ┊begin┊ below to start or ┊about┊ for information about the game."
         );
+        return;
+      }
+      // In-game functions
+      // save
+      if (state.input === "history") {
+        handleToggleHistory();
+        return;
+      }
+      if (state.input === "music") {
+        handleToggleAudio();
         return;
       }
       // save
@@ -214,6 +243,7 @@ const Game = () => {
             if (hitCount === 1) {
               if (code) {
                 setSection(code);
+                setStageHistory([]);
                 setOutput("");
                 return;
               }
@@ -232,6 +262,7 @@ const Game = () => {
                   else addItem(item);
                 }
                 setOutput(reply);
+                setStageHistory((prev) => [...prev, reply]);
                 return;
               }
             }
@@ -282,7 +313,6 @@ const Game = () => {
 
   const dialog = script[state.section].prompt?.dialog ?? "";
 
-  console.log(state.hasBeen);
   return (
     <div className="game" data-scene={state.scene}>
       <div className="alert" hidden={!alertMessage}>
@@ -292,6 +322,7 @@ const Game = () => {
         <button onClick={handleToggleAudio}>
           {state.audioIsPlaying ? "◉ BG Music" : "○ BG Music"}
         </button>
+        <button onClick={handleToggleHistory}>Show Stage History</button>
         <ul className="item-list">
           {state.items.length ? <li>items:</li> : null}
           {state.items.map((i) => (
@@ -349,6 +380,14 @@ const Game = () => {
         loop
         autoPlay={state.audioIsPlaying}
       />
+      {stageHistoryBox ? (
+        <ul className="history-box">
+          Stage Output Text History [ESC to Close]
+          {stageHistory.map((i) => (
+            <li>{i}</li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 };
