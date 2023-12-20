@@ -8,6 +8,7 @@ export const Items = {
   Whiskey: "Whiskey",
   Dagger: "Dagger",
   Pin: "Pin",
+  Timepiece: "Timepiece",
 } as const;
 
 export const Commands = {
@@ -180,7 +181,7 @@ const script: ScriptType = {
     prompt: {
       scene: "BEGIN",
       dialog:
-        "Prepare yourself for a journey like no other. This is a text based game set in a multiverse that takes simple commands to progress, like ┊walk forward┊, ┊look around┊. If you get stuck, read the text carefully, there might be clues. You can save and load by typing ┊save┊ and ┊load┊. Type ┊start┊ to begin. Adventure awaits...",
+        "Prepare yourself for a journey like no other. This is a text based game set in a multiverse that takes simple commands to progress, like ┊walk forward┊, ┊look around┊. If you get stuck, read the text carefully, there might be clues. You can view what was said on each stage by typing ┊history┊. You can save and load by typing ┊save┊ and ┊load┊. Type ┊start┊ to begin. Adventure awaits...",
       choice: [
         {
           terms: buildCommand(Commands.Start),
@@ -193,7 +194,7 @@ const script: ScriptType = {
         {
           terms: ["help", "what do i do"],
           reply:
-            'This game takes simple commands. If the visual-log reads out "to the west..." you can type ┊go west┊ or even simply ┊west┊. You can use ┊continue┊ to keep on a path, or ┊look around┊ to get a sense of where you are (sometimes) and ┊search┊ see if there are any items. Your visual-log will describe a Scene and your cp:output will reply with useful information while in that Scene. Be careful! Some moves will kill you so be sure to type ┊save┊ often. To start the game, try typing ┊begin┊ or ┊insert coin┊ in the command prompt. Type ┊load┊ to load.',
+            'This game takes simple commands. If the visual-log reads out "to the west..." you can type ┊go west┊ or even simply ┊west┊. You can use ┊continue┊ to keep on a path, or ┊look around┊ to get a sense of where you are (sometimes) and ┊search┊ see if there are any items. Your visual-log will describe a Scene and your cp:output will reply with useful information while in that Scene. The output is stored in your stage ┊history┊. Be careful! Some moves will kill you so be sure to type ┊save┊ often. To start the game, try typing ┊begin┊ or ┊insert coin┊ in the command prompt. Type ┊load┊ to load.',
         },
         {
           terms: ["about"],
@@ -367,10 +368,15 @@ const script: ScriptType = {
   TIME_TOMBS_CAVE: {
     prompt: {
       dialog:
-        'You slowly enter the cave. It is warm and welcoming, but you sense a presence. "Time has suddenly become everything...." A booming voice shakes the earth like listening to an avalanche. It is Time itself. "A proposition..." It tells you that it is becoming ill. On one of its branches, creatures have devised a way to control Time infinitely. A random portal here and there is one thing, but a Time...machine? If you can stop them, Time will grant you the power to travel anywhere, feel time not as a river, but rock, sand, magma, all at once. It presents you with a timepiece...fitting. You have a choice. If you can stop these creatures from setting off chaos, you will be rewarded. Tell them who is responsible for this sickness. An array of three portals appears in front of you. One ┊white┊, one ┊green┊, one ┊purple┊. It cannot be sure which branch is infected, so go forth, and use the timepiece to return here. When the time is right, you will know what to do. Which path do you choose? Remember, at certain points on your journey you may be able return here by simply looking at your ┊timepiece┊ to return to the ┊array┊...',
+        'You slowly enter the cave. It is warm and welcoming, but you sense a presence. "Time has suddenly become everything...." A booming voice shakes the earth like listening to an avalanche. It is Time itself. "A proposition..." It tells you that it is becoming ill. On one of its branches, creatures have devised a way to control Time infinitely. A random portal here and there is one thing, but a Time...machine? If you can stop them, Time will grant you the power to travel anywhere, feel time not as a river, but rock, sand, magma, all at once. It presents you with a timepiece...fitting. You have a choice. If you can stop these creatures from setting off chaos, you will be rewarded. Tell them who is responsible for this sickness. Do you accept your fate?',
       choice: [
         veiledThreat,
         timepieceDeny,
+        {
+          terms: buildCommand(Commands.Accept),
+          item: Items.Timepiece,
+          reply: "An array of three portals appears in front of you. One ┊white┊, one ┊green┊, one ┊purple┊. It cannot be sure which branch is infected, so go forth, and might be able to use the timepiece to return here. When the time is right, you will know what to do. Which path do you choose? Remember, at certain points on your journey you may be able return here by simply looking at your ┊timepiece┊ to return to the ┊array┊..."
+        },
         {
           terms: ["white"],
           code: "SHARD_PLAIN_INIT",
@@ -385,12 +391,12 @@ const script: ScriptType = {
         },
         {
           terms: buildCommand(Commands.Talk, ["communicate"]),
-          reply: "Time urges you to choose your destiny...",
+          reply: "Time urges you to accept your destiny...",
         },
         {
           terms: buildCommand(Commands.LookAround),
           reply:
-            "The cave is warm and inviting. The Array oscillates in front as Time watches on, awaiting your actions. Time doesn't look anything like you expected...",
+            "The cave is warm and inviting as Time watches on, awaiting your actions. Time doesn't look anything like you expected...",
         },
       ],
     },
@@ -593,16 +599,12 @@ const script: ScriptType = {
           terms: [
             ...buildCommand(Commands.LookAround),
             ...buildCommand(Commands.Search),
-          ],
-          code: "HANGING_FOREST_ROGUE_DEATH",
-        },
-        {
-          terms: [
             ...buildCommand(Commands.Leave),
             ...buildCommand(Commands.Dodge),
             ...buildCommand(Commands.Threaten),
+            ...buildCommand(Commands.Help),
           ],
-          code: "HANGING_FOREST_ROGUE_DODGE",
+          code: "HANGING_FOREST_ROGUE_DEATH",
         },
       ],
     },

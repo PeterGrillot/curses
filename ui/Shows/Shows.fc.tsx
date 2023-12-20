@@ -33,12 +33,8 @@ const Shows = () => {
     <div className="Shows __capsule">
       <h2>Upcoming Shows</h2>
       <ul className="__list">
-        {!_.size(shows) ? (
-          <p>
-            No Upcoming Shows || Check Facebook, I probably forgot to update!
-          </p>
-        ) : (
-          _.map(shows, (show: ShowType, index: number) => {
+        {shows.length
+          ? shows.map((show: ShowType, index: number) => {
             return (
               <li className="__item" key={index}>
                 <p>
@@ -52,7 +48,7 @@ const Shows = () => {
                   <i className="fa fa-compass" /> {show.venue} \\{" "}
                   {show.location}
                 </p>
-                {show.url !== "#" ? (
+                {!!show.url ? (
                   <p>
                     <a
                       href={show.url}
@@ -60,14 +56,15 @@ const Shows = () => {
                       rel="noopener noreferrer"
                     >
                       <i className="fa fa-list-alt" /> more info &rarr;
-                    </a>
+                      </a>
                   </p>
                 ) : null}
                 <br />
               </li>
             );
           })
-        )}
+          : null}
+        <li>Check back soon, we always have something in the works!</li>
       </ul>
     </div>
   );

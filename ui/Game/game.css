@@ -177,6 +177,26 @@
   align-items: center;
 }
 
+.history-box {
+  position: absolute;
+  top: 10vh;
+  background: #bababa;
+  color: blue;
+  text-shadow: none;
+  box-shadow: 20px 20px 0 magenta;
+  width: 90%;
+  padding: 10px;
+  list-style: decimal-leading-zero;
+  list-style-position: outside;
+  list-style-position: inside;
+  height: 80vh;
+  overflow: auto;
+}
+
+.history-box .button {
+  color: magenta
+}
+
 @keyframes blink-animation {
   to {
     visibility: hidden;
