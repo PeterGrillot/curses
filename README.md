@@ -27,7 +27,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## `npm run deploy`
 
-You need to chmod the deploy shell script. You'll also need the deploy shell script...
+You need to chmod the deploy shell script. You'll also need the deploy shell script. Check out `scripts/deploy.sh` for more information.
 
 ## API
 

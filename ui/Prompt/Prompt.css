@@ -11,12 +11,17 @@
 .Prompt .__header {
   max-width: 50vw;
   text-align: center;
+  font-size: 1rem;
+}
+
+.Prompt .__header p {
+  font-size: 2.4rem;
 }
 
 @media only screen and (max-width: 76.8rem) {
   .Prompt .__header {
     padding: 0 2rem;
-    max-width: auto;
+    max-width: unset;
   }
 }
 

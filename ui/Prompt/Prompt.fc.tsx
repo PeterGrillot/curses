@@ -13,22 +13,31 @@ const Prompt = () => {
         <IntroScreen />
         <h1 hidden>Curse Words Web Portal</h1>
         <h2>
-          New album out now! Listen on{" "}
+          New album "Hyperdrive Overkill" is OUT NOW!!!{" "}
           <a
-            href="https://RecordU.lnk.to/It_Was_the_Cursed_of_Times"
+            href="https://unitedmasters.com/m/hyperdrive-overkill-1"
             target="_blank"
           >
-            these music apps
-          </a>{" "}
-          or{" "}
-          <a href="https://dontsaycursewords.bandcamp.com/" target="_blank">
-            bandcamp.
+            on these music apps
           </a>
         </h2>
         <p>
-          Check out one of our shows below or hit us up on all our social medias
-          listed in the nav. Also check out our <Link to="/epk">EPK</Link> to
-          learn more about the band.
+          Hyperdrive Overkill is an 11-track sci-fi murder mystery concept album
+          from Washington, D.C. space-punk band Curse Words.
+        </p>
+        <p>
+          Set against the collapse of the “City of Dreams,” the album follows an
+          interstellar voyage through the perspectives of characters occupying
+          different levels of a failing society. A Scholar feels trapped in a
+          doomed timeline, a Privateer confronts privilege and corruption, and a
+          fugitive Vagabond discovers that the evil they are fleeing may have
+          followed them aboard.
+        </p>
+        <p>
+          Musically, Hyperdrive Overkill combines driving guitars, urgent dual
+          vocals, massive punk hooks, and synth-driven atmosphere with elements
+          of pop punk, grunge, and alternative rock. The result is equal parts
+          melodic punk record, space opera, and social allegory.
         </p>
       </header>
       <Shows />
