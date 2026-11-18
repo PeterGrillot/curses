@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import _ from '@curses/lodash';
-import request from 'request';
 
 import { Loading } from '../Loading/Loading.fc';
 
@@ -18,18 +17,17 @@ const PressKit = () => {
 	const [ loading, setLoading ] = useState(true);
 
 	useEffect(() => {
-		request(
-			'https://sheetdb.io/api/v1/2d4v3odadqm1a',
-			(error, response, body) => {
-				if (error) {
-					setError(true);
-					return;
-				}
-				const post: any = new PressKitModel(JSON.parse(body)).toUI();
+		fetch('https://sheetdb.io/api/v1/2d4v3odadqm1a')
+			.then((response) => {
+				if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+				return response.json();
+			})
+			.then((data) => {
+				const post = new PressKitModel(data).toUI();
 				setPressKit(post);
 				setLoading(false);
-			}
-		);
+			})
+			.catch(() => setError(true));
 	}, []);
 
 	if (error) return <p>Something Borked</p>;

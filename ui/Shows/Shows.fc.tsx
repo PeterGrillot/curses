@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import _ from "@curses/lodash";
-import request from "request";
 import ShowsModel, { ShowType } from "./Shows.model";
 import "./Shows.css";
 import { Loading } from "../Loading/Loading.fc";
@@ -12,18 +11,17 @@ const Shows = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    request(
-      "https://sheetdb.io/api/v1/6fnxojhlys43x",
-      (error, response, body) => {
-        if (error) {
-          setError(error);
-          return;
-        }
-        const shows: any = new ShowsModel(JSON.parse(body)).toUI();
+    fetch("https://sheetdb.io/api/v1/6fnxojhlys43x")
+      .then((response) => {
+        if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        const shows = new ShowsModel(data).toUI();
         setShows(shows);
         setLoading(false);
-      }
-    );
+      })
+      .catch(setError);
   }, []);
 
   if (error) return <Error error={error} />;

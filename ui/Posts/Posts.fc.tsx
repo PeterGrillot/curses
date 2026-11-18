@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import _ from '@curses/lodash';
-import request from 'request';
 import { Loading } from '../Loading/Loading.fc';
 import PostsModel, { PostType } from './Posts.model';
 import './Posts.css';
@@ -17,18 +16,17 @@ const Posts = () => {
 	const [ loading, setLoading ] = useState(true);
 
 	useEffect(() => {
-		request(
-			'https://spreadsheets.google.com/feeds/list/1pstEHIoEiQiNtYlTTEIygRJaOVVRVUhAy6BGVzNGm20/2/public/full?alt=json',
-			(error, response, body) => {
-				if (error) {
-					setError(true);
-					return;
-				}
-				const post: any = new PostsModel(JSON.parse(body)).toUI();
+		fetch('https://spreadsheets.google.com/feeds/list/1pstEHIoEiQiNtYlTTEIygRJaOVVRVUhAy6BGVzNGm20/2/public/full?alt=json')
+			.then((response) => {
+				if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+				return response.json();
+			})
+			.then((data) => {
+				const post = new PostsModel(data).toUI();
 				setPosts(post);
 				setLoading(false);
-			}
-		);
+			})
+			.catch(() => setError(true));
 	}, []);
 
 	if (error) return <p>Something Borked</p>;
